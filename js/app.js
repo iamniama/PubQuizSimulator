@@ -69,7 +69,7 @@ class NPCTeam extends Team {
 class Game {
     constructor (intRounds, intRoundDuration, intPlayers){
         this.rounds = intRounds;
-        this.currentRound = 1;
+        this.currentRound = 0;
         this.roundDuration = intRoundDuration;
         this.currentRoundTimer = intRoundDuration;
         this.players = this.addPlayers(intPlayers);
@@ -106,33 +106,33 @@ class Game {
         }
     }
     whoWon(){
-        let winnerName = ""
+        let winners = []
+        let highScore = 0
         for (let i = 1; i < this.players.length;i++){
             if (this.players[i].score > this.players[i-1].score){
-                winnerName = this.players[i].name
+                highScore = this.players[i].score
             }else {
-                winnerName = this.players[i-1].name
+                highScore = this.players[i-1].score
             }
-
         }
-        return winnerName
+        for (let i = 1; i < this.players.length;i++){
+            if (this.players[i].score == highScore){
+                winners.push(this.players[i].name)
+            }
+        }
+        return winners
     }
     checkAnswer(player, options, correctAnswer, chances){
         for (let i=0; i<=chances;i++){
             if (player.guess(options) == correctAnswer){
-                console.log(`Guess ${i} right`)
+                //console.log(`Guess ${i} right`)
                 return true
-            }
-            else{ 
-                console.log(`Guess ${i} wrong`)
-            }
-            
+            }            
         }
         return false
     }
     processGuesses(options, correctAnswer, score){
         for (let player of this.players){
-            //console.log(`${player.name} has answered: ${player.answered}`)
             if (this.currentRoundTimer < player.Earliest && !player.answered){
                 if (Math.floor(Math.random() * 100) < player.AnswerChance){
                     player.answered = true
@@ -172,20 +172,28 @@ class Game {
             if (this.currentRound <= this.rounds) {
                 console.log(`End of round ${this.currentRound} scores:`)
                 console.log(`Next round (${this.currentRound}/${this.rounds}) begins...`)
+                this.currentQuestion = this.questions[this.currentRound - 1]
                 console.log(`The question is:  ${this.currentQuestion.questionText}`)
                 for (let player of this.players){
                     console.log(`${player.name}: ${player.score}`)
                 }
-                this.trashTalk()
+                //this.trashTalk()
                 this.resetPlayers()
-                this.currentQuestion = this.questions[this.currentRound - 1]
+                
             }else {
-                console.log("Game over")
-                console.log("Final Scores:")
+                console.log("Game over, Final Scores:")
                 for (let player of this.players){
                     console.log(`${player.name}: ${player.score}`)
                 }
-                console.log(`${this.whoWon()} won the game! `)
+                if (this.whoWon().length >= 2){
+                    console.log("Game was tied!")
+                    console.log("The winners are: ")
+                }else {
+                    console.log("The winner is: ")
+                }
+                for (let name of this.whoWon()){
+                    console.log(`${name}`)
+                }
                 this.watchTimer = false
                 this.end()
             }
@@ -205,6 +213,7 @@ class Game {
         this.watchTimer = true
         this.pointValue = 250
         console.log(`new game starting...${this.watchTimer}`)
+        this.currentRound += 1
         console.log(`Round (${this.currentRound}/${this.rounds}) begins...`)
         this.currentQuestion = this.questions[0]
         console.log(`The question is:  ${this.currentQuestion.questionText}`)
