@@ -82,12 +82,18 @@ class Game {
         this.timeThreshold2 = 6;
     }
     getQuestions(rnds){
-        return [new Question("Question 1?", "foo", "bar", "bat", "baz", "a", "oof", "rab", "tab", "zab"), new Question("Question 2?", "foo", "bar", "bat", "baz", "d", "oof", "rab", "tab", "zab"), new Question("Question 3", "foo", "bar", "bat", "baz", "c", "oof", "rab", "tab", "zab"), new Question("Question 4?", "fooz", "ballz", "bat", "baz", "c", "oof", "rab", "tab", "zab")]
+        return [new Question("How does that line begin?", "foo", "bar", "bat", "baz", "a", "oof", "rab", "tab", "zab"), 
+        new Question("__the Vampire Slayer?", "foo", "bar", "bat", "Buffy", "d", "oof", "rab", "tab", "zab"), 
+        new Question("__ to Picasso", "foo", "bar", "Balls", "baz", "c", "oof", "rab", "tab", "zab"), 
+        new Question("Question 4?", "fooz", "ballz", "bat", "baz", "c", "oof", "rab", "tab", "zab")]
     }
    
     addPlayers(intPlayers){
         console.log(`There would be ${intPlayers} players in this game`)
-        return ([new NPCTeam("Space Monkeys", 0, 2, 11, 80, remarks), new NPCTeam("Lab Rats", 1, 1, 12, 95, remarks), new NPCTeam("Drunky Brewster",2, 0, 2, 1, remarks), new NPCTeam("Les Dieux", 3, 10, 14, 99, dieuxRemarks)])
+        return ([new NPCTeam("Space Monkeys", 0, 2, 11, 60, remarks), 
+                new NPCTeam("Lab Rats", 1, 1, 12, 55, remarks), 
+                new NPCTeam("Drunky Brewster",2, 0, 1, 10, remarks), 
+                new NPCTeam("Les Dieux", 3, 10, 14, 89, dieuxRemarks)])
     }
     resetPlayers(){
         for (let player of this.players){
@@ -171,13 +177,17 @@ class Game {
             this.currentRound += 1
             if (this.currentRound <= this.rounds) {
                 console.log(`End of round ${this.currentRound} scores:`)
-                console.log(`Next round (${this.currentRound}/${this.rounds}) begins...`)
-                this.currentQuestion = this.questions[this.currentRound - 1]
-                console.log(`The question is:  ${this.currentQuestion.questionText}`)
                 for (let player of this.players){
                     console.log(`${player.name}: ${player.score}`)
                 }
-                //this.trashTalk()
+                this.trashTalk()
+                console.log(`Next round (${this.currentRound}/${this.rounds}) begins...`)
+                this.currentQuestion = this.questions[this.currentRound - 1]
+                console.log(`The question is:  ${this.currentQuestion.questionText}`)
+                console.log("Choices:")
+                for (let i = 0;i < this.currentQuestion.answers.length;i++){
+                    console.log(`${qChoices[i]}: ${this.currentQuestion.answers[i].answerText}`)
+                }
                 this.resetPlayers()
                 
             }else {
@@ -186,7 +196,7 @@ class Game {
                     console.log(`${player.name}: ${player.score}`)
                 }
                 if (this.whoWon().length >= 2){
-                    console.log("Game was tied!")
+                    console.log(`Game was tied ${this.whoWon().length} ways!`)
                     console.log("The winners are: ")
                 }else {
                     console.log("The winner is: ")
@@ -217,6 +227,10 @@ class Game {
         console.log(`Round (${this.currentRound}/${this.rounds}) begins...`)
         this.currentQuestion = this.questions[0]
         console.log(`The question is:  ${this.currentQuestion.questionText}`)
+        console.log("Choices:")
+        for (let i = 0;i < this.currentQuestion.answers.length;i++){
+            console.log(`${qChoices[i]}: ${this.currentQuestion.answers[i].answerText}`)
+        }
     }
     stop(){
         this.watchTimer = false
