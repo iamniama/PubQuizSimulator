@@ -1,4 +1,6 @@
-icons = ["🍻", "🥤", "🥂"]
+const icons = ["🍻", "🥤", "🥂", "✨"]
+const remarks = ["i am the greatest!!", "You suck, player 1!", "lorem ipsem dolor", "eat my shorts!"]
+const dieuxRemarks = ["Bow before us", "You are but mortals...", "Fall..."]
 
 
 class Team {
@@ -13,14 +15,22 @@ class Team {
 }
 
 class NPCTeam extends Team {
-    constructor(strname, intIcon, intGuesses, intEntryTime, intAnswerChance){
+    constructor(strname, intIcon, intGuesses, intEntryTime, intAnswerChance, colorCommentary){
         super(strname, intIcon);
         this.chances = intGuesses;
         this.Earliest = intEntryTime;
         this.AnswerChance = intAnswerChance;
+        this.comments = colorCommentary;
     }
     guess(arrQList){
         return (arrQList[Math.floor(Math.random(1) * arrQList.length)])
+    }
+    makeComment(){
+        if (this.wasRight || this.answered == false){
+            return(this.comments[Math.floor(Math.random() * this.comments.length)])
+        }else {
+            return " "
+        }
     }
 }
 
@@ -39,15 +49,26 @@ class Game {
         this.timeThreshold1 = 11;
         this.timeThreshold2 = 6;
     }
+
+   
     addPlayers(intPlayers){
         console.log(`There would be ${intPlayers} players in this game`)
-        return ([new NPCTeam("Space Monkeys", 0, 2, 11, 80), new NPCTeam("Lab Rats", 1, 1, 12, 95), new NPCTeam("Drunky Brewster",2, 0, 10, 5), new NPCTeam("Les Dieux", 1, 10, 14, 99)])
+        return ([new NPCTeam("Space Monkeys", 0, 2, 11, 80, remarks), new NPCTeam("Lab Rats", 1, 1, 12, 95, remarks), new NPCTeam("Drunky Brewster",2, 0, 2, 1, remarks), new NPCTeam("Les Dieux", 3, 10, 14, 99, dieuxRemarks)])
     }
     resetPlayers(){
         for (let player of this.players){
             player.answered = false
             player.wasRight = false
             player.passed = false
+        }
+    }
+    trashTalk(){
+        for (let player of this.players){
+            let remark = player.makeComment()
+            if (remark.length > 2){
+                console.log(`${player.name} says "${remark}"`)
+            }
+            
         }
     }
     whoWon(){
@@ -120,6 +141,7 @@ class Game {
                     console.log(`${player.name}: ${player.score}`)
                 }
                 this.resetPlayers()
+                this.trashTalk()
             }else {
                 console.log("Game over")
                 console.log("Final Scores:")
