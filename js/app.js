@@ -1,6 +1,36 @@
 const icons = ["🍻", "🥤", "🥂", "✨"]
 const remarks = ["i am the greatest!!", "You suck, player 1!", "lorem ipsem dolor", "eat my shorts!"]
 const dieuxRemarks = ["Bow before us", "You are but mortals...", "Fall..."]
+let qChoices = ["a", "b", "c", "d"]
+
+class Question {
+    constructor (strQuestion, strA1, strA2, strA3, strA4, charCorrect, strJ1, strJ2, strJ3, strJ4){
+        this.questionText = strQuestion;
+        this.right = charCorrect;
+        this.answers = [
+            {letter: "a", answerText: strA1, jokeText: strJ1},
+            {letter: "b", answerText: strA2, jokeText: strJ2},
+            {letter: "c", answerText: strA3, jokeText: strJ3},
+            {letter: "d", answerText: strA4, jokeText: strJ4}
+        ]
+    }
+    prune(){
+        for (let i=0;i<this.answers.length;i++) {
+            if (this.answers[i].letter != this.right){
+                this.answers.splice(i, 1)
+                return(this.answers[i].letter)
+            }
+        }
+    }
+    getChoices(){
+        let arrReturn = []
+        for (let answer of this.answers){
+            arrReturn.push(answer.letter)
+        }
+        return arrReturn
+    }
+}
+
 
 
 class Team {
@@ -44,12 +74,16 @@ class Game {
         this.currentRoundTimer = intRoundDuration;
         this.players = this.addPlayers(intPlayers);
         this.watchTimer = false;
+        this.questions = this.getQuestions(intRounds);
+        this.currentQuestion = 0;
         this.timer = setInterval(this.tick.bind(this), 1000);
         this.pointValue = 250;
         this.timeThreshold1 = 11;
         this.timeThreshold2 = 6;
     }
-
+    getQuestions(rnds){
+        return [new Question("Question 1?", "foo", "bar", "bat", "baz", "a", "oof", "rab", "tab", "zab"), new Question("Question 2?", "foo", "bar", "bat", "baz", "d", "oof", "rab", "tab", "zab"), new Question("Question 3", "foo", "bar", "bat", "baz", "c", "oof", "rab", "tab", "zab"), new Question("Question 4?", "fooz", "ballz", "bat", "baz", "c", "oof", "rab", "tab", "zab")]
+    }
    
     addPlayers(intPlayers){
         console.log(`There would be ${intPlayers} players in this game`)
@@ -126,22 +160,25 @@ class Game {
     }
     startRound(){
         this.currentRoundTimer = this.roundDuration
+        this.currentQuestion = this.questions[this.currentRound]
     }
     tick(){
         if (this.watchTimer && this.currentRoundTimer == 0){
             console.log(`Round ${this.currentRound} ends...`)
             this.currentRoundTimer = this.roundDuration
-            this.currentRound += 1
             this.pointValue = 250
             this.penalizeSkips()
+            this.currentRound += 1
             if (this.currentRound <= this.rounds) {
-                console.log(`Next round (${this.currentRound}/${this.rounds}) begins...`)
                 console.log(`End of round ${this.currentRound} scores:`)
+                console.log(`Next round (${this.currentRound}/${this.rounds}) begins...`)
+                console.log(`The question is:  ${this.currentQuestion.questionText}`)
                 for (let player of this.players){
                     console.log(`${player.name}: ${player.score}`)
                 }
-                this.resetPlayers()
                 this.trashTalk()
+                this.resetPlayers()
+                this.currentQuestion = this.questions[this.currentRound - 1]
             }else {
                 console.log("Game over")
                 console.log("Final Scores:")
@@ -155,12 +192,13 @@ class Game {
         }
         if (this.currentRoundTimer > 0 && this.watchTimer){
             this.currentRoundTimer -= 1
-            console.log(`${this.currentRoundTimer} seconds remain in round ${this.currentRound}, question is worth ${this.pointValue} points`)
-            this.processGuesses(["a", "b", "c", "d"], "d", this.pointValue)
+            //console.log(`${this.currentRoundTimer} seconds remain in round ${this.currentRound}, question is worth ${this.pointValue} points`)
+            this.processGuesses(this.currentQuestion.getChoices(), this.currentQuestion.right, this.pointValue)
 
         }
         if (this.currentRoundTimer == this.timeThreshold1 || this.currentRoundTimer == this.timeThreshold2){
             this.pointValue -= 50
+            this.currentQuestion.prune()
         }
     }
     start(){
@@ -168,6 +206,8 @@ class Game {
         this.pointValue = 250
         console.log(`new game starting...${this.watchTimer}`)
         console.log(`Round (${this.currentRound}/${this.rounds}) begins...`)
+        this.currentQuestion = this.questions[0]
+        console.log(`The question is:  ${this.currentQuestion.questionText}`)
     }
     stop(){
         this.watchTimer = false
