@@ -1,3 +1,30 @@
+icons = ["🍻", "🥤"]
+
+
+class Team {
+    constructor (strName, intIcon){
+        this.name = strName;
+        this.icon = icons[intIcon];
+        this.answered = false;
+        this.wasRight = false
+        this.score = 0;
+    }
+}
+
+class NPCTeam extends Team {
+    constructor(strname, intIcon, intGuesses, intEntryTime, intAnswerChance){
+        super(strname, intIcon);
+        this.chances = intGuesses;
+        this.Earliest = intEntryTime;
+        this.AnswerChance = intAnswerChance;
+    }
+    guess(arrQList){
+        return (arrQList[Math.floor(Math.random(1) * arrQList.length)])
+    }
+}
+
+
+
 class Game {
     constructor (intRounds, intRoundDuration, intPlayers){
         this.rounds = intRounds;
@@ -12,7 +39,48 @@ class Game {
         this.timeThreshold2 = 6;
     }
     addPlayers(intPlayers){
-        console.log(`There will be ${intPlayers} players in this game`)
+        console.log(`There would be ${intPlayers} players in this game`)
+        return ([new NPCTeam("Space Monkeys", 0, 2, 11, 80), new NPCTeam("Lab Rats", 1, 1, 12, 95)])
+    }
+    resetPlayers(){
+        for (let player of this.players){
+            player.answered = false
+            player.wasRight = false
+        }
+    }
+    checkAnswer(player, options, correctAnswer, chances){
+        for (let i=0; i<=chances;i++){
+            if (player.guess(options) == correctAnswer){
+                console.log(`Guess ${i} right`)
+                return true
+            }
+            else{ 
+                console.log(`Guess ${i} wrong`)
+            }
+            
+        }
+        return false
+    }
+    processGuesses(options, correctAnswer, score){
+        for (let player of this.players){
+            //console.log(`${player.name} has answered: ${player.answered}`)
+            if (this.currentRoundTimer < player.Earliest && !player.answered){
+                if (Math.floor(Math.random() * 100) < player.AnswerChance){
+                    player.answered = true
+                    if (this.checkAnswer(player, options,correctAnswer, player.chances)){
+                        player.wasRight = true
+                        console.log(`${player.name} ${player.icon} was right!`)
+                        player.score += score
+                    }else {
+                        player.wasRight = false
+                        console.log(`${player.name} ${player.icon} was wrong!`)
+                        player.score -= 50
+                    }
+                    
+                    
+                }
+            }
+        }
     }
     startRound(){
         this.currentRoundTimer = this.roundDuration
@@ -25,8 +93,17 @@ class Game {
             this.pointValue = 250
             if (this.currentRound <= this.rounds) {
                 console.log(`Next round (${this.currentRound}/${this.rounds}) begins...`)
+                console.log(`End of round ${this.currentRound} scores:`)
+                for (let player of this.players){
+                    console.log(`${player.name}: ${player.score}`)
+                }
+                this.resetPlayers()
             }else {
                 console.log("Game over")
+                console.log("Final Scores:")
+                for (let player of this.players){
+                    console.log(`${player.name}: ${player.score}`)
+                }
                 this.watchTimer = false
                 this.end()
             }
@@ -34,6 +111,7 @@ class Game {
         if (this.currentRoundTimer > 0 && this.watchTimer){
             this.currentRoundTimer -= 1
             console.log(`${this.currentRoundTimer} seconds remain in round ${this.currentRound}, question is worth ${this.pointValue} points`)
+            this.processGuesses(["a", "b", "c", "d"], "d", this.pointValue)
 
         }
         if (this.currentRoundTimer == this.timeThreshold1 || this.currentRoundTimer == this.timeThreshold2){
