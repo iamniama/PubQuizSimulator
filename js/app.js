@@ -41,7 +41,7 @@ class Game {
     }
     addPlayers(intPlayers){
         console.log(`There would be ${intPlayers} players in this game`)
-        return ([new NPCTeam("Space Monkeys", 0, 2, 11, 80), new NPCTeam("Lab Rats", 1, 1, 12, 95), new NPCTeam("Drunky Brewster",2, 0, 10, 5)])
+        return ([new NPCTeam("Space Monkeys", 0, 2, 11, 80), new NPCTeam("Lab Rats", 1, 1, 12, 95), new NPCTeam("Drunky Brewster",2, 0, 10, 5), new NPCTeam("Les Dieux", 1, 10, 14, 99)])
     }
     resetPlayers(){
         for (let player of this.players){
