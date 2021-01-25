@@ -48,6 +48,18 @@ class Game {
             player.wasRight = false
         }
     }
+    whoWon(){
+        let winnerName = ""
+        for (let i = 1; i < this.players.length;i++){
+            if (this.players[i].score > this.players[i-1].score){
+                winnerName = this.players[i].name
+            }else {
+                winnerName = this.players[i-1].name
+            }
+
+        }
+        return winnerName
+    }
     checkAnswer(player, options, correctAnswer, chances){
         for (let i=0; i<=chances;i++){
             if (player.guess(options) == correctAnswer){
@@ -104,6 +116,7 @@ class Game {
                 for (let player of this.players){
                     console.log(`${player.name}: ${player.score}`)
                 }
+                console.log(`${this.whoWon()} won the game! `)
                 this.watchTimer = false
                 this.end()
             }
