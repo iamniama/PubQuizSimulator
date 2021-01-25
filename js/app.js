@@ -1,4 +1,4 @@
-icons = ["🍻", "🥤"]
+icons = ["🍻", "🥤", "🥂"]
 
 
 class Team {
@@ -7,6 +7,7 @@ class Team {
         this.icon = icons[intIcon];
         this.answered = false;
         this.wasRight = false
+        this.passed = false;
         this.score = 0;
     }
 }
@@ -40,12 +41,13 @@ class Game {
     }
     addPlayers(intPlayers){
         console.log(`There would be ${intPlayers} players in this game`)
-        return ([new NPCTeam("Space Monkeys", 0, 2, 11, 80), new NPCTeam("Lab Rats", 1, 1, 12, 95)])
+        return ([new NPCTeam("Space Monkeys", 0, 2, 11, 80), new NPCTeam("Lab Rats", 1, 1, 12, 95), new NPCTeam("Drunky Brewster",2, 0, 10, 5)])
     }
     resetPlayers(){
         for (let player of this.players){
             player.answered = false
             player.wasRight = false
+            player.passed = false
         }
     }
     whoWon(){
@@ -94,6 +96,13 @@ class Game {
             }
         }
     }
+    penalizeSkips(){
+        for (let player of this.players){
+            if (player.answered == false){
+                player.score -= 100
+            }
+        }
+    }
     startRound(){
         this.currentRoundTimer = this.roundDuration
     }
@@ -103,6 +112,7 @@ class Game {
             this.currentRoundTimer = this.roundDuration
             this.currentRound += 1
             this.pointValue = 250
+            this.penalizeSkips()
             if (this.currentRound <= this.rounds) {
                 console.log(`Next round (${this.currentRound}/${this.rounds}) begins...`)
                 console.log(`End of round ${this.currentRound} scores:`)
