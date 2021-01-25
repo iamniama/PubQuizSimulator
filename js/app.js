@@ -223,6 +223,7 @@ class Game {
     }
     end(){
         clearInterval(this.timer)
+        return true
     }
 }
 
