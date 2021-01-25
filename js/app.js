@@ -18,15 +18,13 @@ class Game {
         this.currentRoundTimer = this.roundDuration
     }
     tick(){
-        //console.log("Timer works...")
-        //console.log(`watchTimer is ${this.watchTimer}, Current Round Timer: ${this.currentRoundTimer}`)
         if (this.watchTimer && this.currentRoundTimer == 0){
             console.log(`Round ${this.currentRound} ends...`)
             this.currentRoundTimer = this.roundDuration
             this.currentRound += 1
             this.pointValue = 250
             if (this.currentRound <= this.rounds) {
-                console.log(`Round ${this.currentRound} begins...`)
+                console.log(`Next round (${this.currentRound}/${this.rounds}) begins...`)
             }else {
                 console.log("Game over")
                 this.watchTimer = false
@@ -46,6 +44,7 @@ class Game {
         this.watchTimer = true
         this.pointValue = 250
         console.log(`new game starting...${this.watchTimer}`)
+        console.log(`Round (${this.currentRound}/${this.rounds}) begins...`)
     }
     stop(){
         this.watchTimer = false
