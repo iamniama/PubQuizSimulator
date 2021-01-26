@@ -1,7 +1,8 @@
-const icons = ["🍻", "🥤", "🥂", "✨"]
+const icons = ["🍻", "🥤", "🥂", "✨", "🔥"]
 const remarks = ["i am the greatest!!", "You suck, player 1!", "lorem ipsem dolor", "eat my shorts!"]
-const karenRemarks = ["You're not my supervisor!!!", "Oh em gee barternder is hawt!", "Drink! EMPTY! uuughhh!", "bbbrrruuwuuuwuuuugggghhhhh", "YYYAAAAAAAYYYYYY!!!", "America's ()() BABY!"]
+const karenRemarks = ["IIIIYYYYEeeeaahhhhh I'm gonna need the manager here, like niao", "You're not my supervisor!!!", "Oh em gee barternder is hawt!", "Drink! EMPTY! uuughhh!", "bbbrrruuwuuuwuuuugggghhhhh", "YYYAAAAAAAYYYYYY!!!", "America's ()() BABY!"]
 const dieuxRemarks = ["Bow before us", "You are but mortals...", "Fall..."]
+const buzMarks = ["Boom, right in the nick of time", "Zing!", "Whoooosh", "*BOW*"]
 let qChoices = ["a", "b", "c", "d"]
 
 class Question {
@@ -69,9 +70,10 @@ class NPCTeam extends Team {
         }
     }
 }
-
+// 4
 const midworld = new NPCTeam("Midworld Lanes", 0, 1, 14, 40, remarks)
 const drunky = new NPCTeam("Drunky Brewster", 2, 5, 2, 10, karenRemarks)
+const buzzerBeaters = new NPCTeam("Buzzer Beaters", 4, 10, 3, 95, buzMarks)
 
 
 class Game {
@@ -90,16 +92,18 @@ class Game {
         this.timeThreshold2 = 6;
     }
     getQuestions(rnds){
-        return [new Question("How does that line begin?", "foo", "bar", "bat", "baz", "a", "oof", "rab", "tab", "zab"), 
+        /* return [new Question("How does that line begin?", "foo", "bar", "bat", "baz", "a", "oof", "rab", "tab", "zab"), 
         new Question("__the Vampire Slayer?", "foo", "bar", "bat", "Buffy", "d", "oof", "rab", "tab", "zab"), 
         new Question("__ to Picasso", "foo", "bar", "Balls", "baz", "c", "oof", "rab", "tab", "zab"), 
         new Question("Question 4?", "fooz", "ballz", "bat", "baz", "c", "oof", "rab", "tab", "zab")]
+        */
+       return [questionAlpha, questionDelta, questionEpsilon]
     }
    
     addPlayers(intPlayers){
         console.log(`There would be ${intPlayers} players in this game`)
         return ([midworld, 
-                new NPCTeam("Lab Rats", 1, 1, 12, 55, remarks), 
+                buzzerBeaters, 
                 drunky, 
                 new NPCTeam("Les Dieux", 3, 5, 14, 89, dieuxRemarks)])
     }
