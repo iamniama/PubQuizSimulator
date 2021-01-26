@@ -23,9 +23,12 @@ class Question {
             {letter: "d", answerText: strA4, jokeText: strJ4}
         ]
     }
-    prune(){
+    prune(){ // need to update this to try a random one, so it isn't the same two choices pulled out every time
         for (let i=0;i<this.answers.length;i++) {
+            console.log(`|${this.right}|${this.answers[i].letter}|`)
             if (this.answers[i].letter != this.right){
+                console.log(`BINGLE|${this.right}|${this.answers[i].letter}|`)
+                document.querySelector(`#${this.answers[i].letter}`).textContent = `${this.answers[i].letter} : ${this.answers[i].jokeText}`
                 this.answers.splice(i, 1)
                 return(this.answers[i].letter)
             }
@@ -143,11 +146,11 @@ class Game {
         new Question("__ to Picasso", "foo", "bar", "Balls", "baz", "c", "oof", "rab", "tab", "zab"), 
         new Question("Question 4?", "fooz", "ballz", "bat", "baz", "c", "oof", "rab", "tab", "zab")]
         */
-       return [questionBeta, questionDelta, questionEpsilon]
+       return [questionAlpha, questionZeta, questionGamma]
     }
    
     addPlayers(intPlayers){
-        console.log(`There would be ${intPlayers} players in this game`)
+        //console.log(`There would be ${intPlayers} players in this game`)
         return ([midworld, 
                 buzzerBeaters, 
                 drunky, 
@@ -202,11 +205,11 @@ class Game {
                     player.answered = true
                     if (this.checkAnswer(player, options,correctAnswer, player.chances)){
                         player.wasRight = true
-                        console.log(`${player.name} ${player.icon} was right!`)
+                        //console.log(`${player.name} ${player.icon} was right!`)
                         player.score += score
                     }else {
                         player.wasRight = false
-                        console.log(`${player.name} ${player.icon} was wrong!`)
+                        //console.log(`${player.name} ${player.icon} was wrong!`)
                         player.score -= 50
                     }
                     
@@ -241,10 +244,14 @@ class Game {
                 this.trashTalk()
                 console.log(`Next round (${this.currentRound}/${this.rounds}) begins...`)
                 this.currentQuestion = this.questions[this.currentRound - 1]
+                //document.querySelector("#question-disp").textContent = this.currentQuestion.questionText
+                document.querySelector("#question-disp").textContent = `${this.currentQuestion.right}| <br /> ${this.currentQuestion.questionText}`
                 console.log(`The question is:  ${this.currentQuestion.questionText}`)
                 console.log("Choices:")
                 for (let i = 0;i < this.currentQuestion.answers.length;i++){
                     console.log(`${qChoices[i]}: ${this.currentQuestion.answers[i].answerText}`)
+                    //document.querySelector(`#${this.currentQuestion.answers[i].letter}`).textContent = `${this.answers[i].letter} : ${this.currentQuestion.answers[i].answerText}`
+                    document.querySelector(`#${this.currentQuestion.answers[i].letter}`).textContent = `${this.currentQuestion.answers[i].letter}: ${this.currentQuestion.answers[i].answerText}`
                 }
                 this.resetPlayers()
                 
@@ -289,10 +296,14 @@ class Game {
         this.currentRound += 1
         console.log(`Round (${this.currentRound}/${this.rounds}) begins...`)
         this.currentQuestion = this.questions[0]
+        document.querySelector("#question-disp").textContent = `${this.currentQuestion.right} <br /> ${this.currentQuestion.questionText}`
         console.log(`The question is:  ${this.currentQuestion.questionText}`)
         console.log("Choices:")
         for (let i = 0;i < this.currentQuestion.answers.length;i++){
             console.log(`${qChoices[i]}: ${this.currentQuestion.answers[i].answerText}`)
+            document.querySelector(`#${this.currentQuestion.answers[i].letter}`).textContent = `${this.currentQuestion.answers[i].letter}: ${this.currentQuestion.answers[i].answerText}`
+            
+            //document.querySelector(`#${this.currentQuestion.answers[i].letter}`).textContent = `${this.answers[i].letter} : ${this.currentQuestion.answers[i].answerText}`
         }
     }
     stop(){
