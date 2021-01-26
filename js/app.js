@@ -37,6 +37,7 @@ const questionAlpha = new Question("Which British actor has played James Bond th
 const questionBravo = new Question("Who played 'The Master' alongside Michelle Gomez's Missy in Doctor Who?", "Peter Capaldi", "Jon Hamm", "Jon Simm", "Mark Hamill", "c", "*GASP!!!*", "Different kind of Mad Man", " ", "Use the TARDIS, Luke!")
 const questionDelta = new Question("Robert Downey, Jr released a full length studio album in 2004.  What was its title?", "Black Coffee Blues", "The Futurist", "Little Joe Sure Can Sing", "Rehab", "b", "Not even close", "", "Getting warm", "Maybe the same one, years apart?")
 const questionGamma = new Question("What was the name of Iron Maiden frontman Bruce Dickinson's first solo album?", "The Wicker Man", "Brave New World", "Tattooed Millionaire", "Sorry, Eddie", "c", "Iron Maidens like Wicker Men", "There is more to Maiden than the singer", " ", "Actually, the other side was funnier")
+const questionEpsilon = new Question("What are the two main ingredients of a Dark and Stormy (cocktail)?", "rum and coke", "bacardi 151 and bailey's irish cream", "dark rum and ginger beer", "tequila and kahlua", "c", "not even with a lime", "more like a cement mixer", " ", fallbackString)
 
 class Team {
     constructor (strName, intIcon){
@@ -224,6 +225,11 @@ class Game {
         if (this.currentRoundTimer == this.timeThreshold1 || this.currentRoundTimer == this.timeThreshold2){
             this.pointValue -= 50
             this.currentQuestion.prune()
+            console.log(`Question: ${this.currentQuestion.questionText}`)
+            console.log("Choices:")
+            for (let answer of this.currentQuestion.answers){
+                console.log(`${answer.letter}: ${answer.answerText}`)
+            }
         }
     }
     start(){
