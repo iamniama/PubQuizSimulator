@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Permanent+Marker&family=Press+Start+2P&display=swap');
+
+h5 {
+    border: 1px solid black;
+    margin: 5px;
+    text-align: center;
+    border-radius: 10%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    align-items: center;
+}
+
+.question-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+section {
+    border: 1px solid black;
+    width: 30%;
+    
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    height: 200px;
+    border: solid 1px black;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    border: solid 1px black;
+    width: 80%;
+}
+
+button {
+    width: 20px;
+}
+
+.hdr {
+    background-color: darkgreen;
+    color: whitesmoke;
+}
+
+.top {
+    font-family: 'Press Start 2P', cursive;
+}
+
+.bottom {
+    font-family: 'Permanent Marker', cursive;
+}
+
