@@ -1,5 +1,6 @@
 const icons = ["🍻", "🥤", "🥂", "✨"]
 const remarks = ["i am the greatest!!", "You suck, player 1!", "lorem ipsem dolor", "eat my shorts!"]
+const karenRemarks = ["You're not my supervisor!!!", "Oh em gee barterbder is hawt!", "Drink! EMPTY! uuughhh!"]
 const dieuxRemarks = ["Bow before us", "You are but mortals...", "Fall..."]
 let qChoices = ["a", "b", "c", "d"]
 
@@ -64,6 +65,8 @@ class NPCTeam extends Team {
     }
 }
 
+const midworld = new NPCTeam("Midworld Lanes", 0, 1, 14, 40, remarks)
+const drunky = new NPCTeam("Drunky Brewster", 2, 5, 2, 10, karenRemarks)
 
 
 class Game {
@@ -90,10 +93,10 @@ class Game {
    
     addPlayers(intPlayers){
         console.log(`There would be ${intPlayers} players in this game`)
-        return ([new NPCTeam("Space Monkeys", 0, 2, 11, 60, remarks), 
+        return ([midworld, 
                 new NPCTeam("Lab Rats", 1, 1, 12, 55, remarks), 
-                new NPCTeam("Drunky Brewster",2, 0, 1, 10, remarks), 
-                new NPCTeam("Les Dieux", 3, 10, 14, 89, dieuxRemarks)])
+                drunky, 
+                new NPCTeam("Les Dieux", 3, 5, 14, 89, dieuxRemarks)])
     }
     resetPlayers(){
         for (let player of this.players){
