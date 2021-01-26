@@ -1,6 +1,6 @@
 const icons = ["🍻", "🥤", "🥂", "✨"]
 const remarks = ["i am the greatest!!", "You suck, player 1!", "lorem ipsem dolor", "eat my shorts!"]
-const karenRemarks = ["You're not my supervisor!!!", "Oh em gee barterbder is hawt!", "Drink! EMPTY! uuughhh!"]
+const karenRemarks = ["You're not my supervisor!!!", "Oh em gee barternder is hawt!", "Drink! EMPTY! uuughhh!", "bbbrrruuwuuuwuuuugggghhhhh", "YYYAAAAAAAYYYYYY!!!", "America's ()() BABY!"]
 const dieuxRemarks = ["Bow before us", "You are but mortals...", "Fall..."]
 let qChoices = ["a", "b", "c", "d"]
 
@@ -32,7 +32,11 @@ class Question {
     }
 }
 
-
+const fallbackString = "The other side was actually funnier..."
+const questionAlpha = new Question("Which British actor has played James Bond the least number of times?", "Rowan Atkinson", "George Lazenby", "Sean Connery", "Daniel Craig", "a", "", "Zero is less than one", "Not thish one", "Quantum of Nope")
+const questionBravo = new Question("Who played 'The Master' alongside Michelle Gomez's Missy in Doctor Who?", "Peter Capaldi", "Jon Hamm", "Jon Simm", "Mark Hamill", "c", "*GASP!!!*", "Different kind of Mad Man", " ", "Use the TARDIS, Luke!")
+const questionDelta = new Question("Robert Downey, Jr released a full length studio album in 2004.  What was its title?", "Black Coffee Blues", "The Futurist", "Little Joe Sure Can Sing", "Rehab", "b", "Not even close", "", "Getting warm", "Maybe the same one, years apart?")
+const questionGamma = new Question("What was the name of Iron Maiden frontman Bruce Dickinson's first solo album?", "The Wicker Man", "Brave New World", "Tattooed Millionaire", "Sorry, Eddie", "c", "Iron Maidens like Wicker Men", "There is more to Maiden than the singer", " ", "Actually, the other side was funnier")
 
 class Team {
     constructor (strName, intIcon){
@@ -54,7 +58,7 @@ class NPCTeam extends Team {
         this.comments = colorCommentary;
     }
     guess(arrQList){
-        return (arrQList[Math.floor(Math.random(1) * arrQList.length)])
+        return (arrQList[Math.floor(Math.random() * arrQList.length)])
     }
     makeComment(){
         if (this.wasRight || this.answered == false){
