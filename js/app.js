@@ -25,12 +25,13 @@ class Question {
     }
     prune(){ // need to update this to try a random one, so it isn't the same two choices pulled out every time
         for (let i=0;i<this.answers.length;i++) {
-            console.log(`|${this.right}|${this.answers[i].letter}|`)
-            if (this.answers[i].letter != this.right){
-                console.log(`BINGLE|${this.right}|${this.answers[i].letter}|`)
-                document.querySelector(`#${this.answers[i].letter}`).textContent = `${this.answers[i].letter} : ${this.answers[i].jokeText}`
-                this.answers.splice(i, 1)
-                return(this.answers[i].letter)
+            //console.log(`|${this.right}|${this.answers[i].letter}|`)
+            let randCounter = Math.floor(Math.random() * this.answers.length)
+            if (this.answers[randCounter].letter != this.right){
+                console.log(`BINGLE|${this.right}|${this.answers[randCounter].letter}|`)
+                document.querySelector(`#${this.answers[randCounter].letter}`).textContent = `${this.answers[randCounter].letter} : ${this.answers[randCounter].jokeText}`
+                this.answers.splice(randCounter, 1)
+                return(this.answers[randCounter].letter)
             }
         }
     }
