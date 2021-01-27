@@ -2,7 +2,7 @@ const icons = ["🍻", "🥤", "🥂", "✨", "🔥"]
 const remarks = ["i am the greatest!!", "You suck, player 1!", "lorem ipsem dolor", "eat my shorts!"]
 const karenRemarks = ["IIIIYYYYEeeeaahhhhh I'm gonna need the manager here, like niao", "You're not my supervisor!!!", "Oh em gee barternder is hawt!", "Drink! EMPTY! uuughhh!", "bbbrrruuwuuuwuuuugggghhhhh", "YYYAAAAAAAYYYYYY!!!", "America's ()() BABY!"]
 const dieuxRemarks = ["Bow before us", "You are but mortals...", "Fall..."]
-const buzMarks = ["Boom, right in the nick of time", "Zing!", "Whoooosh", "*BOW*"]
+const buzMarks = ["Boom, right in the nick of time", "Zing!", "Whoooosh", "*BOW*", "Mic Check, Mic DROP!"]
 let qChoices = ["a", "b", "c", "d"]
 
 /* 
@@ -23,7 +23,7 @@ class Question {
             {letter: "d", answerText: strA4, jokeText: strJ4}
         ]
     }
-    prune(){ // need to update this to try a random one, so it isn't the same two choices pulled out every time
+    prune(){ // removes a random wrong answer from Question.answers and replaces it in UX with the alternate/joke text.  called at 50% and 75% round elapsed
         for (let i=0;i<this.answers.length;i++) {
             //console.log(`|${this.right}|${this.answers[i].letter}|`)
             let randCounter = Math.floor(Math.random() * this.answers.length)
@@ -31,7 +31,7 @@ class Question {
                 console.log(`BINGLE|${this.right}|${this.answers[randCounter].letter}|`)
                 document.querySelector(`#${this.answers[randCounter].letter}`).textContent = `${this.answers[randCounter].letter} : ${this.answers[randCounter].jokeText}`
                 this.answers.splice(randCounter, 1)
-                return(this.answers[randCounter].letter)
+                return(1)
             }
         }
     }
@@ -162,6 +162,7 @@ class Game {
             player.answered = false
             player.wasRight = false
             player.passed = false
+            this.clearPlayerPanels()
         }
     }
     trashTalk(){ // process color commentary at the end of a round
@@ -175,14 +176,15 @@ class Game {
     }
     whoWon(){
         let winners = []
-        let highScore = 0
+        let highScore = this.players[0]
         for (let i = 1; i < this.players.length;i++){
             if (this.players[i].score > this.players[i-1].score){
                 highScore = this.players[i].score
-            }else {
+            } /*else {
                 highScore = this.players[i-1].score
-            }
+            }*/
         }
+        console.log(`high score is ${highScore}`)
         for (let i = 1; i < this.players.length;i++){
             if (this.players[i].score == highScore){
                 winners.push(this.players[i].name)
@@ -200,18 +202,23 @@ class Game {
         return false
     }
     processGuesses(options, correctAnswer, score){
-        for (let player of this.players){
-            if (this.currentRoundTimer < player.Earliest && !player.answered){
-                if (Math.floor(Math.random() * 100) < player.AnswerChance){
-                    player.answered = true
-                    if (this.checkAnswer(player, options,correctAnswer, player.chances)){
-                        player.wasRight = true
+        for (let i = 0;i< this.players.length;i++) {
+        //for (let player of this.players){
+            if (this.currentRoundTimer < this.players[i].Earliest && !this.players[i].answered){
+                if (Math.floor(Math.random() * 100) < this.players[i].AnswerChance){
+                    this.players[i].answered = true
+                    if (this.checkAnswer(this.players[i], options,correctAnswer, this.players[i].chances)){
+                        this.players[i].wasRight = true
+                        document.querySelector(`div[player="${i}"]`).style.backgroundColor = "green"
                         //console.log(`${player.name} ${player.icon} was right!`)
-                        player.score += score
+                        this.players[i].score += score
+                        document.querySelector(`h4[player="${i}"]`).textContent = this.players[i].score
                     }else {
-                        player.wasRight = false
+                        this.players[i].wasRight = false
                         //console.log(`${player.name} ${player.icon} was wrong!`)
-                        player.score -= 50
+                        document.querySelector(`div[player="${i}"]`).style.backgroundColor = "red"
+                        this.players[i].score -= 50
+                        document.querySelector(`h4[player="${i}"]`).textContent = this.players[i].score
                     }
                     
                     
@@ -230,6 +237,11 @@ class Game {
         this.currentRoundTimer = this.roundDuration
         this.currentQuestion = this.questions[this.currentRound]
     }
+    clearPlayerPanels(){
+        for (let i=0;i<this.players.length;i++){
+            document.querySelector(`div[player="${i}"]`).style.backgroundColor = "white"
+        }
+    }
     tick(){
         if (this.watchTimer && this.currentRoundTimer == 0){
             console.log(`Round ${this.currentRound} ends...`)
@@ -243,8 +255,11 @@ class Game {
                     console.log(`${player.name}: ${player.score}`)
                 }
                 this.trashTalk()
+                alert("Get ready for the next round!")
                 console.log(`Next round (${this.currentRound}/${this.rounds}) begins...`)
+                this.clearPlayerPanels()
                 this.currentQuestion = this.questions[this.currentRound - 1]
+
                 //document.querySelector("#question-disp").textContent = this.currentQuestion.questionText
                 document.querySelector("#question-disp").textContent = `${this.currentQuestion.right}| <br /> ${this.currentQuestion.questionText}`
                 console.log(`The question is:  ${this.currentQuestion.questionText}`)
@@ -258,24 +273,31 @@ class Game {
                 
             }else {
                 console.log("Game over, Final Scores:")
+                let resultHTML = "Game Over! <br /><br />"
                 for (let player of this.players){
                     console.log(`${player.name}: ${player.score}`)
                 }
                 if (this.whoWon().length >= 2){
                     console.log(`Game was tied ${this.whoWon().length} ways!`)
+                    resultHTML += `Game was tied ${this.whoWon().length} ways! <br />`
                     console.log("The winners are: ")
+                    resultHTML += "The winners are: <br />"
                 }else {
                     console.log("The winner is: ")
+                    resultHTML += "The winner is: <br />"
                 }
                 for (let name of this.whoWon()){
                     console.log(`${name}`)
+                    resultHTML += `${name} <br />`
                 }
+                document.querySelector("#question-disp").innerHTML = resultHTML
                 this.watchTimer = false
                 this.end()
             }
         }
         if (this.currentRoundTimer > 0 && this.watchTimer){
             this.currentRoundTimer -= 1
+            document.querySelector("#timer").textContent = this.currentRoundTimer
             //console.log(`${this.currentRoundTimer} seconds remain in round ${this.currentRound}, question is worth ${this.pointValue} points`)
             this.processGuesses(this.currentQuestion.getChoices(), this.currentQuestion.right, this.pointValue)
 
@@ -290,11 +312,18 @@ class Game {
             }
         }
     }
+    setupPlayers(){
+        for (let i = 0; i< this.players.length;i++){
+            document.querySelector(`h3[player="${i}"]`).textContent = this.players[i].name
+        }
+    }
     start(){ // populates and kicks off the first round, and tells the Game to watch the timer
         this.watchTimer = true
         this.pointValue = 250
-        console.log(`new game starting...${this.watchTimer}`)
+        //console.log(`new game starting...${this.watchTimer}`)
+        this.setupPlayers()
         this.currentRound += 1
+        document.querySelector("#timer").textContent = this.currentRoundTimer
         console.log(`Round (${this.currentRound}/${this.rounds}) begins...`)
         this.currentQuestion = this.questions[0]
         document.querySelector("#question-disp").textContent = `${this.currentQuestion.right} <br /> ${this.currentQuestion.questionText}`
