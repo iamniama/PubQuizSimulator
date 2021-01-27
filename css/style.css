@@ -19,9 +19,18 @@ body {
     flex-direction: column;
 }
 
+.player-panel {
+    width: 190px;
+    height: 150px;
+    border: 1px solid black;
+    text-align: center;
+
+}
+
 section {
     border: 1px solid black;
     width: 30%;
+    text-align: center;
     
 }
 
@@ -48,6 +57,7 @@ button {
 .hdr {
     background-color: darkgreen;
     color: whitesmoke;
+    text-align: center;
 }
 
 .top {
@@ -58,3 +68,6 @@ button {
     font-family: 'Permanent Marker', cursive;
 }
 
+#answers {
+    margin-top: 15px;
+}
