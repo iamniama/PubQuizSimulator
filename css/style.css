@@ -19,6 +19,7 @@ body {
     background-color: black;
     background: url(../rsrc/bar.jpg);
     background-size: cover;
+    background-repeat: no-repeat;
     user-select: none;
 }
 

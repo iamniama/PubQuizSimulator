@@ -151,7 +151,7 @@ const questionUpsilon = new Question
 const standardTeams = [new NPCTeam("Algorithm Section", 3, 1, 14, 50, remarks), new NPCTeam("Generica", 3, 1, 14, 50, remarks)]
 const loserTeams = [new NPCTeam("Drunky Brewster", 2, 5, 2, 10, karenRemarks)]
 const heroTeams = [new NPCTeam("Buzzer Beaters", 4, 10, 3, 95, buzMarks), new NPCTeam("Die Ubernerden", 1, 3, 13, 80, dieuxRemarks)]
-const questions = [questionAlpha, questionBeta, questionDelta, questionEpsilon, questionGamma, questionZeta, questionEta, questionTheta, questionIota, questionKappa]
+const questions = [questionAlpha, questionBeta, questionDelta, questionEpsilon, questionGamma, questionZeta, questionEta, questionTheta, questionIota, questionKappa, questionLamda, questionMu, questionNu]
 
 
 class Game {
@@ -178,7 +178,14 @@ class Game {
         new Question("__ to Picasso", "foo", "bar", "Balls", "baz", "c", "oof", "rab", "tab", "zab"), 
         new Question("Question 4?", "fooz", "ballz", "bat", "baz", "c", "oof", "rab", "tab", "zab")]
         */
-       return([questionEta, questionIota, questionKappa])
+       //return([questionEta, questionIota, questionKappa])
+       const qList = []
+       for (let i = 0;i < rnds;i++){
+           let qIndex = Math.floor(Math.random() * rnds)
+           qList.push(questions[qIndex])
+           questions.splice(qIndex, 1)
+       }
+       return(qList)
     }
     addPlayers(){
         const player = new Team("Name", 1)
