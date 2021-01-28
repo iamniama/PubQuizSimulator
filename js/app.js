@@ -120,7 +120,7 @@ such as the Teams and the Questions.
 const fallBackStrings = ["The other side was actually funnier", "Error: Joke found but not funny", "Insert witty remark here"]
 const fallbackString = "Error: Joke found but not funny"
 const icons = ["🍻", "🥤", "🥂", "✨", "🔥"]
-const remarks = ["i am the greatest!!", "Your joke here", "lorem ipsem dolor", "eat my shorts!"]
+const remarks = ["i am the greatest!!", "Your joke here", "lorem ipsem dolor", "eat my shorts!", "Muse fate how?  Bask me now!", "Sometimes, I think I'm nothing but a member function in a game class..."]
 const karenRemarks = ["IIIIYYYYEeeeaahhhhh I'm gonna need the manager here, like niao", "You're not my supervisor!!!", "Oh em gee barternder is hawt!", "Drink! EMPTY! uuughhh!", "bbbrrruuwuuuwuuuugggghhhhh", "YYYAAAAAAAYYYYYY!!!", "America's ()() BABY!"]
 const dieuxRemarks = ["Bow before us", "You are but mortals...", "Fall..."]
 const buzMarks = ["Boom, right in the nick of time", "Zing!", "Whoooosh", "*BOW*", "Mic Check, Mic DROP!"]
@@ -137,9 +137,9 @@ const questionTheta = new Question("What is the smallest country on the Earth?",
 const questionIota = new Question("In bowling, what is the term for three strikes in a row?", "Beginner's Luck", "Hat Trick", "Triple", "Turkey", "d", "Also yes, but...", "Not cold, just regular", "Give thanks", "")
 const questionKappa = new Question("What grain is sake made from?", "Rice", "Wheat", "Corn", "Barley", "a", "", "Gluten Free!", "Just...ew", "Nope")
 
-const questionLamda = new Question
-const questionMu = new Question
-const questionNu = new Question
+const questionLamda = new Question("What is the only vitamin not found in eggs?", "Vitamin A", "Vitamin C", "Vitamin E", "Vitamin Q", "b", "Too obvious...", "", "So close...", "Get real!")
+const questionMu = new Question("What Beatles song was banned from the BBC because of its lyrics?", "I am the Walrus", "The Girl Can't Help It", "Love Me Do", "Come Together", "a", "", "But the BBC didn't mind...", "They Love Me Did", "Maybe at the zoo?")
+const questionNu = new Question("What was singer David Bowie's last name at birth?", "Bowie", "Smith", "Jones", "Lancaster", "c", "A little obvious...", "Alias Smith and...", "", "You'd almost think...")
 const questionXi = new Question
 const questionOmicron = new Question
 const questionPi = new Question
