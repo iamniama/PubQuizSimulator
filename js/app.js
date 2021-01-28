@@ -8,7 +8,7 @@ The prune method removes one possible answer from the list
 The getChoices method gets all remaining answer letters, used by the NPCPlayer object to make its random selection.
 */
 
-class Question {
+class Question { 
     constructor (strQuestion, strA1, strA2, strA3, strA4, charCorrect, strJ1, strJ2, strJ3, strJ4){
         this.questionText = strQuestion;
         this.right = charCorrect;
@@ -31,7 +31,7 @@ class Question {
             }
         }
     }
-    getChoices(){
+    getChoices(){  //gets the possible answer letters.  necessary since i am removing possible right answers at intervals.  this allows NPCTeams to avoid choosing eliminated answers
         let arrReturn = []
         for (let answer of this.answers){
             arrReturn.push(answer.letter)
@@ -42,22 +42,6 @@ class Question {
 
 
 
-/*
-const questionEta = new Question
-const questionTheta = new Question
-const questionIota = new Question
-const questionKappa = new Question
-const questionLamda = new Question
-const questionMu = new Question
-const questionNu = new Question
-const questionXi = new Question
-const questionOmicron = new Question
-const questionPi = new Question
-const questionRho = new Question
-const questionSigma = new question
-const questionTau = new Question
-const questionUpsilon = new Question
-*/
 
 /* 
 The Team object represents the player in the Game object and is the base class for the NPCTeam object 
@@ -105,18 +89,9 @@ class NPCTeam extends Team {
         }
     }
 }
-// 4
-//const midworld = new NPCTeam("Midworld Lanes", 0, 1, 14, 40, remarks)
-//const drunky = new NPCTeam("Drunky Brewster", 2, 5, 2, 10, karenRemarks)
-//const buzzerBeaters = new NPCTeam("Buzzer Beaters", 4, 10, 3, 95, buzMarks)
 
-/* 
-The Game object does the majority of the heavy lifting for PQS.
-It manages the timer, tracks rounds, and contains all the other objects that the game uses,
-such as the Teams and the Questions.
 
-*/
-
+// miscellaneous game data, questions, players, etc
 const fallBackStrings = ["The other side was actually funnier", "Error: Joke found but not funny", "Insert witty remark here"]
 const fallbackString = "Error: Joke found but not funny"
 const icons = ["🍻", "🥤", "🥂", "✨", "🔥"]
@@ -140,7 +115,7 @@ const questionKappa = new Question("What grain is sake made from?", "Rice", "Whe
 const questionLamda = new Question("What is the only vitamin not found in eggs?", "Vitamin A", "Vitamin C", "Vitamin E", "Vitamin Q", "b", "Too obvious...", "", "So close...", "Get real!")
 const questionMu = new Question("What Beatles song was banned from the BBC because of its lyrics?", "I am the Walrus", "The Girl Can't Help It", "Love Me Do", "Come Together", "a", "", "But the BBC didn't mind...", "They Love Me Did", "Maybe at the zoo?")
 const questionNu = new Question("What was singer David Bowie's last name at birth?", "Bowie", "Smith", "Jones", "Lancaster", "c", "A little obvious...", "Alias Smith and...", "", "You'd almost think...")
-const questionXi = new Question
+const questionXi = new Question("In Buffy: the Vampire Slayer, what was Angel's real first name?", "John", "Max", "Sean", "Liam", "d", fallBackStrings[Math.floor(Math.random() * fallBackStrings.length)], "Too German...", "Right country...", "")
 const questionOmicron = new Question
 const questionPi = new Question
 const questionRho = new Question
@@ -151,8 +126,15 @@ const questionUpsilon = new Question
 const standardTeams = [new NPCTeam("Algorithm Section", 3, 1, 14, 50, remarks), new NPCTeam("Generica", 3, 1, 14, 50, remarks)]
 const loserTeams = [new NPCTeam("Drunky Brewster", 2, 5, 2, 10, karenRemarks)]
 const heroTeams = [new NPCTeam("Buzzer Beaters", 4, 10, 3, 95, buzMarks), new NPCTeam("Die Ubernerden", 1, 3, 13, 80, dieuxRemarks)]
-const theQuestions = [questionAlpha, questionBeta, questionDelta, questionEpsilon, questionGamma, questionZeta, questionEta, questionTheta, questionIota, questionKappa, questionLamda, questionMu, questionNu]
+const theQuestions = [questionXi, questionAlpha, questionBeta, questionDelta, questionEpsilon, questionGamma, questionZeta, questionEta, questionTheta, questionIota, questionKappa, questionLamda, questionMu, questionNu]
 
+
+/* 
+The Game object does the majority of the heavy lifting for PQS.
+It manages the timer, tracks rounds, and contains all the other objects that the game uses,
+such as the Teams and the Questions.
+
+*/
 
 class Game {
     constructor (intRounds, intRoundDuration, intPlayers){
@@ -172,7 +154,7 @@ class Game {
         this.userOK = true;
         this.chatSound = new Audio("./rsrc/ding.mp3")
     }
-    getQuestions(rnds){
+    getQuestions(rnds){  //build the initial question pool 
        const qList = []
        for (let i = 0;i < rnds;i++){
            let qIndex = Math.floor(Math.random() * theQuestions.length)
@@ -182,19 +164,19 @@ class Game {
        }
        return(qList)
     }
-    setCookie(strValue, expHours, keyName){
+    setCookie(strValue, expHours, keyName){  //not used, I got lazy and did this outside the object
         let dt = new Date()
         d.setTime(d.getTime() + (expHours * 60 * 60 * 1000))
         document.cookie = `${keyName} = ${strValue}; expires=${dt.toUTCString};path=/`
     }
-    addPlayers(){
+    addPlayers(){ //populate the list of players
         const player = new Team("Name", 1)
         return ([player, 
                 heroTeams[Math.floor(Math.random() * heroTeams.length)], 
                 loserTeams[Math.floor(Math.random() * loserTeams.length)], 
                 standardTeams[Math.floor(Math.random() * standardTeams.length)]])
     }
-    processGuesses(options, correctAnswer, score){
+    processGuesses(options, correctAnswer, score){ //runs every second, processes NPC turns and guesses
         for (let i = 1;i< this.players.length;i++) {
         //for (let player of this.players){
             if (this.currentRoundTimer < this.players[i].Earliest && !this.players[i].answered){
@@ -219,7 +201,7 @@ class Game {
             }
         }
     }
-    penalizeSkips(){
+    penalizeSkips(){ //take away points if teams don't answer
         for (let i = 0;i < this.players.length; i++){
             if (this.players[i].answered == false){
                 this.players[i].score -= 100
@@ -236,12 +218,12 @@ class Game {
             this.clearPlayerPanels()
         }
     }
-    clearPlayerPanels(){
+    clearPlayerPanels(){  //clear red/green after round
         for (let i=0;i<this.players.length;i++){
             document.querySelector(`div[player="${i}"]`).style.backgroundColor = "white"
         }
     }
-    setupPlayers(){
+    setupPlayers(){ //populate initial values for players on the board
         for (let i = 0; i< this.players.length;i++){
             document.querySelector(`h3[player="${i}"]`).textContent = this.players[i].name
         }
@@ -259,7 +241,7 @@ class Game {
             
         }
     }
-    whoWon(){
+    whoWon(){  //pretty self explanatory, who won the game?
         let winners = []
         let highScore = this.players[0].score
         for (let i = 1; i < this.players.length;i++){
@@ -280,7 +262,7 @@ class Game {
         }
         return winners
     }
-    checkAnswer(player, options, correctAnswer, chances){
+    checkAnswer(player, options, correctAnswer, chances){  //check the NPCTeam guess, handles the number of chances for the advantage system
         for (let i=0; i<=chances;i++){
             if (player.guess(options) == correctAnswer){
                 //console.log(`Guess ${i} right`)
@@ -294,7 +276,7 @@ class Game {
             document.querySelector(`h3[player="${i}"]`).textContent = this.players[i].name
         }
     }
-    startRound(){
+    startRound(){  //start a new round in the game
         //document.querySelector('#start-game').classList.toggle("btn-disabled")
         this.currentRound += 1
         this.watchTimer = true
@@ -309,7 +291,7 @@ class Game {
             document.querySelector(`#${this.currentQuestion.answers[i].letter}`).textContent = `${this.currentQuestion.answers[i].letter}: ${this.currentQuestion.answers[i].answerText}`
         }
     }
-    startGame(evt){
+    startGame(evt){  //start the game
         this.watchTimer = true
         //this.setupPlayers()
         this.startRound()
@@ -320,11 +302,11 @@ class Game {
         document.querySelector("#timer").style.opacity = "1"
         
     }
-    pause(){
+    pause(){  //stop watching the timer until we resume the game by setting watchTimer to true
         this.watchTimer = false
         this.enableNextRound()
     }
-    endRound(){
+    endRound(){  //process end of round actions
         this.penalizeSkips()
         //this.currentRound += 1
         this.trashTalk()
@@ -333,7 +315,7 @@ class Game {
             this.endGame()
         }
     }
-    endGame(){
+    endGame(){  //end the game and calculate total score
         console.log("Game over, Final Scores:")
                 let resultHTML = "Game Over! <br /><br />"
                 for (let player of this.players){
@@ -362,10 +344,10 @@ class Game {
                 document.querySelector("#question-disp").style.opacity = "1"
                 document.querySelector("#timer").style.opacity = "0"
     }
-    enableNextRound(){
+    enableNextRound(){ //allow the user to click the next round button
         document.querySelector('#next-round').classList.toggle("btn-disabled")
     }
-    tick() {
+    tick() {  //each second of the interval
         this.internalCounter += 1
         if (this.currentRoundTimer == 0 && this.watchTimer){
             this.endRound()
@@ -390,12 +372,12 @@ class Game {
             }
         }
     }
-    end(){
+    end(){ //stop the timer
         clearInterval(this.timer)
         return true
     }
 }
-const myGame = new Game(10, 15, 4)
+const myGame = new Game(10, 15, 4)  
 if (document.cookie.split(';').some((item) => item.trim().startsWith('team='))) {
     myGame.players[0].name = document.cookie.split('; ').find(row => row.startsWith('team')).split('=')[1];
 } else {
@@ -456,16 +438,7 @@ for (div of document.querySelectorAll("#answer")){
         playerGuess(evt.target.id)
     })
 }
-/*
-document.querySelector("header").addEventListener("click", (evt)=>{
-    document.querySelector("#instructions").style.display = "inherit"
-    document.querySelector("#instructions").addEventListener("click", (evt)=> {
-        document.querySelector("#instructions").style.display = "none"
-    })
-    //evt.target.style.display = "none"
-    document.querySelector("header").removeEventListener("click", )
-})
-*/
+
 
 document.querySelector("#instructions").addEventListener("click", (evt)=> {
     document.querySelector("#instructions").style.display = "none"
