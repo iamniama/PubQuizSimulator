@@ -375,7 +375,7 @@ class Game {
         return true
     }
 }
-const myGame = new Game(3, 15, 4)
+const myGame = new Game(10, 30, 4)
 myGame.players[0].name = prompt("What is your Team Name?", "Hairy Potters")
 const myStartGame = myGame.startGame.bind(myGame)
 const myNextRound = myGame.startRound.bind(myGame)
