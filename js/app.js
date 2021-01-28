@@ -357,7 +357,7 @@ class Game {
         }
         if (this.currentRoundTimer > 0 && this.watchTimer){
             this.currentRoundTimer -= 1
-            document.querySelector("#timer").textContent = this.currentRoundTimer
+            document.querySelector("#timer").textContent = `${this.currentRoundTimer} / ${this.pointValue}`
             //console.log(`${this.currentRoundTimer} seconds remain in round ${this.currentRound}, question is worth ${this.pointValue} points`)
             this.processGuesses(this.currentQuestion.getChoices(), this.currentQuestion.right, this.pointValue)
 
