@@ -170,6 +170,7 @@ class Game {
         this.timeThreshold1 = Math.floor(intRoundDuration * .5);
         this.timeThreshold2 = Math.floor(intRoundDuration * .25);
         this.userOK = true;
+        this.chatSound = new Audio("./rsrc/ding.mp3")
     }
     getQuestions(rnds){
         /* return [new Question("How does that line begin?", "foo", "bar", "bat", "baz", "a", "oof", "rab", "tab", "zab"), 
@@ -244,7 +245,10 @@ class Game {
             if (remark.length > 2){
                 console.log(`${this.players[i].name} says "${remark}"`)
                 document.querySelector("#chatboxx").innerHTML += `${this.players[i].name}:  ${remark} <br /><br />`
+                this.chatSound.play()
+                document.querySelector("#chatboxx").scrollTop = document.querySelector("#chatboxx").textContent.length
             }
+
             
         }
     }
@@ -375,7 +379,7 @@ class Game {
         return true
     }
 }
-const myGame = new Game(10, 30, 4)
+const myGame = new Game(3, 15, 4)
 myGame.players[0].name = prompt("What is your Team Name?", "Hairy Potters")
 const myStartGame = myGame.startGame.bind(myGame)
 const myNextRound = myGame.startRound.bind(myGame)
