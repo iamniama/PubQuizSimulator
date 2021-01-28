@@ -138,21 +138,21 @@ such as the Teams and the Questions.
 
 class Game {
     constructor (intRounds, intRoundDuration, intPlayers){
-        this.internalCounter = 0;
-        this.rounds = intRounds;
-        this.currentRound = 0;
-        this.roundDuration = intRoundDuration;
-        this.currentRoundTimer = intRoundDuration;
-        this.players = this.addPlayers(intPlayers);
-        this.watchTimer = false;
-        this.questions = this.getQuestions(intRounds);
-        this.currentQuestion = 0;
-        this.timer = setInterval(this.tick.bind(this), 1000);
-        this.pointValue = 250;
-        this.timeThreshold1 = Math.floor(intRoundDuration * .5);
-        this.timeThreshold2 = Math.floor(intRoundDuration * .25);
-        this.userOK = true;
-        this.chatSound = new Audio("./rsrc/ding.mp3")
+        this.internalCounter = 0; //trackis the cycles of the interval.  mainly used for debugging
+        this.rounds = intRounds; //the number of questions in the game
+        this.currentRound = 0; // the current round of the game
+        this.roundDuration = intRoundDuration;  // how long is a round/question?
+        this.currentRoundTimer = intRoundDuration; //set the timer for the first round
+        this.players = this.addPlayers(intPlayers); //add Team objects, the actual player, and 1 strong, 1 weak, and 1 average NPC
+        this.watchTimer = false; // do we care about the interval right at this moment?  state variable to determine whether or not we are watching the clock for a round
+        this.questions = this.getQuestions(intRounds);  // get questions for the game, based on the given number of rounds
+        this.currentQuestion = 0; //which question are we on at the moment?
+        this.timer = setInterval(this.tick.bind(this), 1000); // the timer
+        this.pointValue = 250; // base point value of the question.  ideally this should be split out into a base and current
+        this.timeThreshold1 = Math.floor(intRoundDuration * .5); // when do we pull the first wrong answer out?
+        this.timeThreshold2 = Math.floor(intRoundDuration * .25); // and the second?
+        this.userOK = true;  // used for debugging
+        this.chatSound = new Audio("./rsrc/ding.mp3") //it goes ding when there's stuff, specifically new content in the "chat window"
     }
     getQuestions(rnds){  //build the initial question pool 
        const qList = []
@@ -176,7 +176,7 @@ class Game {
                 loserTeams[Math.floor(Math.random() * loserTeams.length)], 
                 standardTeams[Math.floor(Math.random() * standardTeams.length)]])
     }
-    processGuesses(options, correctAnswer, score){ //runs every second, processes NPC turns and guesses
+    processGuesses(options, correctAnswer, score){ //runs every second, called by tick(), processes NPC turns and guesses
         for (let i = 1;i< this.players.length;i++) {
         //for (let player of this.players){
             if (this.currentRoundTimer < this.players[i].Earliest && !this.players[i].answered){
