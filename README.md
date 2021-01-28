@@ -9,6 +9,8 @@ Where we are at in the course, a persistence mechanism (which would rely on an A
 It occurred to me, though, that the real of fun of pub quiz is competition, silly team names, and maybe a little trash talk...
 
 
+[PLAY](https://iamniama.github.io/PubQuizSimulator/)
+
 ## The Concept
 * 10 2 minute rounds of multiple choice (4 choices) trivia
     * questions selected from a pool of *20-25* to enhance replay value
