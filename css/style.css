@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono:wght@300&family=Permanent+Marker&family=Press+Start+2P&display=swap');
 
+* {
+    box-sizing: border-box;
+  }
+
 h5 {
     border: 1px solid black;
     margin: 5px;
@@ -54,7 +58,7 @@ header {
     align-items: center;
     width: 40%;
     height: 150px;
-    margin-bottom: 5px;
+    margin-bottom: 25px;
 }
 
 #center-panel{
@@ -86,6 +90,7 @@ main {
     align-items: center;
     width: 90%;
     height: 60%;
+    margin-top: 50px;
 }
 
 .btn-panel {
@@ -128,16 +133,13 @@ button {
     color: whitesmoke;
     text-align: center;
     border: 5px outset #442900;
-    margin-bottom: 5px;
+    margin-bottom: 25px;
     font-family: 'Permanent Marker', cursive;
+    padding: 40px;
 }
 
 .top {
     font-family: 'Press Start 2P', cursive;
-}
-
-.bottom {
-    font-family: 'Permanent Marker', cursive;
 }
 
 #answers {
