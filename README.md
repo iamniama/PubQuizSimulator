@@ -12,31 +12,32 @@ It occurred to me, though, that the real of fun of pub quiz is competition, sill
 [PLAY](https://iamniama.github.io/PubQuizSimulator/)
 
 ## The Concept
-* 10 2 minute rounds of multiple choice (4 choices) trivia
+* 10 2 minute rounds of multiple choice (4 choices) trivia *This was intolerably long for demo purposes, so I shortened it to 15 seconds, though the round value is still customizable*
     * questions selected from a pool of *20-25* to enhance replay value
-    * at the **1 minute** mark, one wrong choice is replaced with a witty remark, and the point value of the question is reduced
-    * at the **30 second** mark, another wrong choice is replaced with a witty remark, and the point value goes down again
+    * at the ~~1 minute mark~~ **50% timer elapsed**, one wrong choice is replaced with a witty remark, and the point value of the question is reduced
+    * at the ~~30 second~~ **75% timer elapsed** mark, another wrong choice is replaced with a witty remark, and the point value goes down again
     * A wrong answer or no answer results in a loss of points
         * Not answering costs more points than being wrong
         * Team may PASS before the 1 minute mark to skip the question without losing points
 
-* A player provides a team name and selects a logo from a curated list. Player's team information (name and icon selection) will be persisted in a cookie *(5-10 icons, most likely)*
+* A player provides a team name and ~~selects a logo from a curated list~~ *I took the logo out due to time constraints* . Player's team information (name ~~and icon selection~~) ~~will~~ is persisted in a cookie *(5-10 icons, most likely)*
 
 * The game selects three opponents for the player:
     * One *standard* opponent, who will make a random guess at a random point in the round
     * One *weak* opponent who *should always* lose
     * One *Hero* opponent, who will have one or more advantages, such as multiple guesses and a higher likelihood of anwering earlier in the round.
 
-* Each team is presented with a series of **ten** questions, one at a time.
-  * There is no break between questions, unlike in the real world.  This is the *Bar at the End of Time*, where it is **Always NOW**
+* Each team is presented with a series of **ten** *(customizable in the code)* questions, one at a time.
+  * There is ~~no~~ a break between questions ~~, unlike in the real world.  This is the *Bar at the End of Time*, where it is **Always NOW**~~ Neat idea, but made the game hard to follow.  Now there is a button for that...
 
 * At the end of every round, score is updated
-  * A special flair will be given to the team in the lead
+  * ~~A special flair will be given to the team in the lead~~ This also was cut for time constraints, and because I cut icons and flair out
   * Some teams will make "comments" at the end or beginning of a round
 
-* At the end of the 10th round, we announce a winner.
+* At the end of the ~~10th round~~ game, we announce a winner.
     * Computer teams that win will also have a comment of some kind
 
+**NOTE: team names were adjusted because I was usually making them late at night **
 * The Teams
     * Standard Teams
         * Algorithm Section
@@ -58,14 +59,14 @@ It occurred to me, though, that the real of fun of pub quiz is competition, sill
 2. If new player (based on cookie check), we show a modal to define a team (enter name and select logo)
    1. User chooses team stuff
    2. new Team modal goes away
-3. After registration, or if existing team, show button to start game
+3. After registration, or if existing team, show button to start game *after the instructions modal is closed...*
    1. button goes away while game is in progress
    2. App selects 1 standard opponent, 1 weak opponent, and 1 Hero opponent
 4. Game is a series of 10 timed rounds
-5. At the beginning of each round, start a 2minute timer
+5. At the beginning of each round, start a ~~2minute~~ timer
 6. Display the question text, four possible answers, and the pass button
 7. Pass button allows team to skip without losing points for no/wrong answer
-8. At 50% time elapsed, hide pass button, 
+8. At 50% time elapsed, ~~hide pass button~~, *due to shorter rounds, the pass button stays for the whole round for the moment*
    1. and swap one answer for the alternate value 
    2. and lower the question's point value
 9. At 75% time elapsed, swap another answer for the alternate value
@@ -75,9 +76,9 @@ It occurred to me, though, that the real of fun of pub quiz is competition, sill
     2. and repeat from 5 above, effectively
 11. After 10 rounds, tally the total score
     1. update the Team scores
-    2. update the flair for the top team
+    2. ~~update the flair for the top team~~
     3. reset the main panel (questions/answers) and buttons
-12. Game should end if window loses focus (no cheating!)
+12. Game should end if window loses focus (no cheating!) *another time issue, though with the shorter round times, its kinda moot*
 
 ## Wireframe/Page Layout
 
