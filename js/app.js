@@ -151,7 +151,7 @@ const questionUpsilon = new Question
 const standardTeams = [new NPCTeam("Algorithm Section", 3, 1, 14, 50, remarks), new NPCTeam("Generica", 3, 1, 14, 50, remarks)]
 const loserTeams = [new NPCTeam("Drunky Brewster", 2, 5, 2, 10, karenRemarks)]
 const heroTeams = [new NPCTeam("Buzzer Beaters", 4, 10, 3, 95, buzMarks), new NPCTeam("Die Ubernerden", 1, 3, 13, 80, dieuxRemarks)]
-const questions = [questionAlpha, questionBeta, questionDelta, questionEpsilon, questionGamma, questionZeta, questionEta, questionTheta, questionIota, questionKappa, questionLamda, questionMu, questionNu]
+const theQuestions = [questionAlpha, questionBeta, questionDelta, questionEpsilon, questionGamma, questionZeta, questionEta, questionTheta, questionIota, questionKappa, questionLamda, questionMu, questionNu]
 
 
 class Game {
@@ -173,19 +173,19 @@ class Game {
         this.chatSound = new Audio("./rsrc/ding.mp3")
     }
     getQuestions(rnds){
-        /* return [new Question("How does that line begin?", "foo", "bar", "bat", "baz", "a", "oof", "rab", "tab", "zab"), 
-        new Question("__the Vampire Slayer?", "foo", "bar", "bat", "Buffy", "d", "oof", "rab", "tab", "zab"), 
-        new Question("__ to Picasso", "foo", "bar", "Balls", "baz", "c", "oof", "rab", "tab", "zab"), 
-        new Question("Question 4?", "fooz", "ballz", "bat", "baz", "c", "oof", "rab", "tab", "zab")]
-        */
-       //return([questionEta, questionIota, questionKappa])
        const qList = []
        for (let i = 0;i < rnds;i++){
-           let qIndex = Math.floor(Math.random() * rnds)
-           qList.push(questions[qIndex])
-           questions.splice(qIndex, 1)
+           let qIndex = Math.floor(Math.random() * theQuestions.length)
+           qList.push(theQuestions[qIndex])
+           theQuestions.splice(qIndex, 1)
+           console.log(`There are ${theQuestions.length} questions left in the pool`)
        }
        return(qList)
+    }
+    setCookie(strValue, expHours, keyName){
+        let dt = new Date()
+        d.setTime(d.getTime() + (expHours * 60 * 60 * 1000))
+        document.cookie = `${keyName} = ${strValue}; expires=${dt.toUTCString};path=/`
     }
     addPlayers(){
         const player = new Team("Name", 1)
@@ -395,8 +395,15 @@ class Game {
         return true
     }
 }
-const myGame = new Game(3, 15, 4)
-myGame.players[0].name = prompt("What is your Team Name?", "Hairy Potters")
+const myGame = new Game(10, 15, 4)
+if (document.cookie.split(';').some((item) => item.trim().startsWith('team='))) {
+    myGame.players[0].name = document.cookie.split('; ').find(row => row.startsWith('team')).split('=')[1];
+} else {
+    playerName = prompt("What is your Team Name?", "Hairy Potters")
+    myGame.players[0].name = playerName
+    document.cookie = `team=${playerName}`
+}
+
 myGame.setupPlayers()
 const myStartGame = myGame.startGame.bind(myGame)
 const myNextRound = myGame.startRound.bind(myGame)
@@ -449,3 +456,17 @@ for (div of document.querySelectorAll("#answer")){
         playerGuess(evt.target.id)
     })
 }
+/*
+document.querySelector("header").addEventListener("click", (evt)=>{
+    document.querySelector("#instructions").style.display = "inherit"
+    document.querySelector("#instructions").addEventListener("click", (evt)=> {
+        document.querySelector("#instructions").style.display = "none"
+    })
+    //evt.target.style.display = "none"
+    document.querySelector("header").removeEventListener("click", )
+})
+*/
+
+document.querySelector("#instructions").addEventListener("click", (evt)=> {
+    document.querySelector("#instructions").style.display = "none"
+})

@@ -16,11 +16,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: black;
-    background: url(../rsrc/bar.jpg);
+    background-image: url(../rsrc/bar.jpg);
     background-size: cover;
+    background-position: 50% 50%;
     background-repeat: no-repeat;
     user-select: none;
+    height: 100%;
+    width: 100%;
 }
 
 .question-panel {
@@ -29,7 +31,33 @@ body {
     opacity: 0;
 }
 
+.answer {
+    border: 1px outset whitesmoke;
+    padding: 5px;
+    width: 500px;
+}
+.how-to-play{
+    background-color: darkgreen;
+    margin-bottom: 20px;
+}
 
+#instructions {
+    position: relative;
+    background-color: darkgreen;
+    color: whitesmoke;
+    font-family: 'Permanent Marker', cursive;
+    width: 400px;
+    height: 500px;
+    z-index: 5;
+    border: 3px outset burlywood;
+}
+
+.dox {
+    background-color: darkgreen;
+    color: whitesmoke;
+    font-family: 'Permanent Marker', cursive;
+    z-index: 5;
+}
 
 .player-panel {
     width: 190px;
