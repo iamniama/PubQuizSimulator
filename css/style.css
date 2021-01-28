@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Permanent+Marker&family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono:wght@300&family=Permanent+Marker&family=Press+Start+2P&display=swap');
 
 h5 {
     border: 1px solid black;
@@ -52,6 +52,26 @@ main {
 
 button {
     width: 70px;
+}
+
+.btn-disabled{
+    cursor: not-allowed;
+    pointer-events: none;
+    display: none;
+}
+
+#chat {
+    width: 80%;
+}
+
+#chatboxx {
+    text-align: left;
+    width: 100%;
+    overflow-y: auto;
+    height: 150px;
+    background-color: black;
+    color: greenyellow;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .hdr {

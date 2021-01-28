@@ -1,8 +1,4 @@
-const icons = ["🍻", "🥤", "🥂", "✨", "🔥"]
-const remarks = ["i am the greatest!!", "You suck, player 1!", "lorem ipsem dolor", "eat my shorts!"]
-const karenRemarks = ["IIIIYYYYEeeeaahhhhh I'm gonna need the manager here, like niao", "You're not my supervisor!!!", "Oh em gee barternder is hawt!", "Drink! EMPTY! uuughhh!", "bbbrrruuwuuuwuuuugggghhhhh", "YYYAAAAAAAYYYYYY!!!", "America's ()() BABY!"]
-const dieuxRemarks = ["Bow before us", "You are but mortals...", "Fall..."]
-const buzMarks = ["Boom, right in the nick of time", "Zing!", "Whoooosh", "*BOW*", "Mic Check, Mic DROP!"]
+
 let qChoices = ["a", "b", "c", "d"]
 
 /* 
@@ -44,13 +40,8 @@ class Question {
     }
 }
 
-const fallbackString = "The other side was actually funnier..."
-const questionAlpha = new Question("Which British actor has played James Bond the least number of times?", "Rowan Atkinson", "George Lazenby", "Sean Connery", "Daniel Craig", "a", "", "Zero is less than one", "Not thish one", "Quantum of Nope")
-const questionBeta = new Question("Who played 'The Master' alongside Michelle Gomez's Missy in Doctor Who?", "Peter Capaldi", "Jon Hamm", "Jon Simm", "Mark Hamill", "c", "*GASP!!!*", "Different kind of Mad Man", " ", "Use the TARDIS, Luke!")
-const questionDelta = new Question("Robert Downey, Jr released a full length studio album in 2004.  What was its title?", "Black Coffee Blues", "The Futurist", "Little Joe Sure Can Sing", "Rehab", "b", "Not even close", "", "Getting warm", "Maybe the same one, years apart?")
-const questionGamma = new Question("What was the name of Iron Maiden frontman Bruce Dickinson's first solo album?", "The Wicker Man", "Brave New World", "Tattooed Millionaire", "Sorry, Eddie", "c", "Iron Maidens like Wicker Men", "There is more to Maiden than the singer", " ", "Actually, the other side was funnier")
-const questionEpsilon = new Question("What are the two main ingredients of a Dark and Stormy (cocktail)?", "rum and coke", "bacardi 151 and bailey's irish cream", "dark rum and ginger beer", "tequila and kahlua", "c", "not even with a lime", "more like a cement mixer", " ", fallbackString)
-const questionZeta = new Question("In what modern day country was Nikola Tesla born?", "Romania", "Argentina", "Belgium", "Croatia", "d", "no electric dracula", fallbackString, "mmm...electric chocolate", " ")
+
+
 /*
 const questionEta = new Question
 const questionTheta = new Question
@@ -115,9 +106,9 @@ class NPCTeam extends Team {
     }
 }
 // 4
-const midworld = new NPCTeam("Midworld Lanes", 0, 1, 14, 40, remarks)
-const drunky = new NPCTeam("Drunky Brewster", 2, 5, 2, 10, karenRemarks)
-const buzzerBeaters = new NPCTeam("Buzzer Beaters", 4, 10, 3, 95, buzMarks)
+//const midworld = new NPCTeam("Midworld Lanes", 0, 1, 14, 40, remarks)
+//const drunky = new NPCTeam("Drunky Brewster", 2, 5, 2, 10, karenRemarks)
+//const buzzerBeaters = new NPCTeam("Buzzer Beaters", 4, 10, 3, 95, buzMarks)
 
 /* 
 The Game object does the majority of the heavy lifting for PQS.
@@ -126,8 +117,46 @@ such as the Teams and the Questions.
 
 */
 
+const fallBackStrings = ["The other side was actually funnier", "Error: Joke found but not funny", "Insert witty remark here"]
+const fallbackString = "Error: Joke found but not funny"
+const icons = ["🍻", "🥤", "🥂", "✨", "🔥"]
+const remarks = ["i am the greatest!!", "Your joke here", "lorem ipsem dolor", "eat my shorts!"]
+const karenRemarks = ["IIIIYYYYEeeeaahhhhh I'm gonna need the manager here, like niao", "You're not my supervisor!!!", "Oh em gee barternder is hawt!", "Drink! EMPTY! uuughhh!", "bbbrrruuwuuuwuuuugggghhhhh", "YYYAAAAAAAYYYYYY!!!", "America's ()() BABY!"]
+const dieuxRemarks = ["Bow before us", "You are but mortals...", "Fall..."]
+const buzMarks = ["Boom, right in the nick of time", "Zing!", "Whoooosh", "*BOW*", "Mic Check, Mic DROP!"]
+
+
+const questionAlpha = new Question("Which British actor has played James Bond the least number of times?", "Rowan Atkinson", "George Lazenby", "Sean Connery", "Daniel Craig", "a", "", "Zero is less than one", "Not thish one", "Quantum of Nope")
+const questionBeta = new Question("Who played 'The Master' alongside Michelle Gomez's Missy in Doctor Who?", "Peter Capaldi", "Jon Hamm", "Jon Simm", "Mark Hamill", "c", "*GASP!!!*", "Different kind of Mad Man", " ", "Use the TARDIS, Luke!")
+const questionDelta = new Question("Robert Downey, Jr released a full length studio album in 2004.  What was its title?", "Black Coffee Blues", "The Futurist", "Little Joe Sure Can Sing", "Rehab", "b", "Not even close", "", "Getting warm", "Maybe the same one, years apart?")
+const questionGamma = new Question("What was the name of Iron Maiden frontman Bruce Dickinson's first solo album?", "The Wicker Man", "Brave New World", "Tattooed Millionaire", "Sorry, Eddie", "c", "Iron Maidens like Wicker Men", "There is more to Maiden than the singer", " ", "Actually, the other side was funnier")
+const questionEpsilon = new Question("What are the two main ingredients of a Dark and Stormy (cocktail)?", "rum and coke", "bacardi 151 and bailey's irish cream", "dark rum and ginger beer", "tequila and kahlua", "c", "not even with a lime", "more like a cement mixer", " ", fallbackString)
+const questionZeta = new Question("In what modern day country was Nikola Tesla born?", "Romania", "Argentina", "Belgium", "Croatia", "d", "no electric dracula", fallbackString, "mmm...electric chocolate", " ")
+const questionEta = new Question("What did the Romans call the modern day country of Scotland?", "Gaul", "Scotlandia", "Caledonia", "Brittania", "c", "The unmitigated...", fallBackStrings[0], "", "Close, but no haggis")
+const questionTheta = new Question("What is the smallest country on the Earth?", "Vatican City", "Luxembourg", "Russia", "Italy", "a", "", "Smaller, and even more Lux", "Only on opposite day", "It fits within")
+const questionIota = new Question("In bowling, what is the term for three strikes in a row?", "Beginner's Luck", "Hat Trick", "Triple", "Turkey", "d", "Also yes, but...", "Not cold, just regular", "Give thanks", "")
+const questionKappa = new Question("What grain is sake made from?", "Rice", "Wheat", "Corn", "Barley", "a", "", "Gluten Free!", "Just...ew", "Nope")
+
+const questionLamda = new Question
+const questionMu = new Question
+const questionNu = new Question
+const questionXi = new Question
+const questionOmicron = new Question
+const questionPi = new Question
+const questionRho = new Question
+const questionSigma = new Question
+const questionTau = new Question
+const questionUpsilon = new Question
+
+const standardTeams = [new NPCTeam("Algorithm Section", 3, 1, 14, 50, remarks), new NPCTeam("Generica", 3, 1, 14, 50, remarks)]
+const loserTeams = [new NPCTeam("Drunky Brewster", 2, 5, 2, 10, karenRemarks)]
+const heroTeams = [new NPCTeam("Buzzer Beaters", 4, 10, 3, 95, buzMarks), new NPCTeam("Die Ubernerden", 1, 3, 13, 80, dieuxRemarks)]
+const questions = [questionAlpha, questionBeta, questionDelta, questionEpsilon, questionGamma, questionZeta, questionEta, questionTheta, questionIota, questionKappa]
+
+
 class Game {
     constructor (intRounds, intRoundDuration, intPlayers){
+        this.internalCounter = 0;
         this.rounds = intRounds;
         this.currentRound = 0;
         this.roundDuration = intRoundDuration;
@@ -138,8 +167,9 @@ class Game {
         this.currentQuestion = 0;
         this.timer = setInterval(this.tick.bind(this), 1000);
         this.pointValue = 250;
-        this.timeThreshold1 = 11;
-        this.timeThreshold2 = 6;
+        this.timeThreshold1 = Math.floor(intRoundDuration * .5);
+        this.timeThreshold2 = Math.floor(intRoundDuration * .25);
+        this.userOK = true;
     }
     getQuestions(rnds){
         /* return [new Question("How does that line begin?", "foo", "bar", "bat", "baz", "a", "oof", "rab", "tab", "zab"), 
@@ -147,62 +177,17 @@ class Game {
         new Question("__ to Picasso", "foo", "bar", "Balls", "baz", "c", "oof", "rab", "tab", "zab"), 
         new Question("Question 4?", "fooz", "ballz", "bat", "baz", "c", "oof", "rab", "tab", "zab")]
         */
-       return [questionAlpha, questionZeta, questionGamma]
+       return([questionEta, questionIota, questionKappa])
     }
-   
-    addPlayers(intPlayers){
-        //console.log(`There would be ${intPlayers} players in this game`)
-        return ([midworld, 
-                buzzerBeaters, 
-                drunky, 
-                new NPCTeam("Les Dieux", 3, 5, 14, 89, dieuxRemarks)])
-    }
-    resetPlayers(){  //reset state values  for all Teams
-        for (let player of this.players){
-            player.answered = false
-            player.wasRight = false
-            player.passed = false
-            this.clearPlayerPanels()
-        }
-    }
-    trashTalk(){ // process color commentary at the end of a round
-        for (let player of this.players){
-            let remark = player.makeComment()
-            if (remark.length > 2){
-                console.log(`${player.name} says "${remark}"`)
-            }
-            
-        }
-    }
-    whoWon(){
-        let winners = []
-        let highScore = this.players[0]
-        for (let i = 1; i < this.players.length;i++){
-            if (this.players[i].score > this.players[i-1].score){
-                highScore = this.players[i].score
-            } /*else {
-                highScore = this.players[i-1].score
-            }*/
-        }
-        console.log(`high score is ${highScore}`)
-        for (let i = 1; i < this.players.length;i++){
-            if (this.players[i].score == highScore){
-                winners.push(this.players[i].name)
-            }
-        }
-        return winners
-    }
-    checkAnswer(player, options, correctAnswer, chances){
-        for (let i=0; i<=chances;i++){
-            if (player.guess(options) == correctAnswer){
-                //console.log(`Guess ${i} right`)
-                return true
-            }            
-        }
-        return false
+    addPlayers(){
+        const player = new Team("Name", 1)
+        return ([player, 
+                heroTeams[Math.floor(Math.random() * heroTeams.length)], 
+                loserTeams[Math.floor(Math.random() * loserTeams.length)], 
+                standardTeams[Math.floor(Math.random() * standardTeams.length)]])
     }
     processGuesses(options, correctAnswer, score){
-        for (let i = 0;i< this.players.length;i++) {
+        for (let i = 1;i< this.players.length;i++) {
         //for (let player of this.players){
             if (this.currentRoundTimer < this.players[i].Earliest && !this.players[i].answered){
                 if (Math.floor(Math.random() * 100) < this.players[i].AnswerChance){
@@ -227,52 +212,114 @@ class Game {
         }
     }
     penalizeSkips(){
-        for (let player of this.players){
-            if (player.answered == false){
-                player.score -= 100
+        for (let i = 0;i < this.players.length; i++){
+            if (this.players[i].answered == false){
+                this.players[i].score -= 100
+                document.querySelector(`h4[player="${i}"]`).textContent = this.players[i].score
             }
         }
     }
-    startRound(){
-        this.currentRoundTimer = this.roundDuration
-        this.currentQuestion = this.questions[this.currentRound]
+    resetPlayers(){  //reset state values  for all Teams
+        this.userOK = true
+        for (let i = 0; i < this.players.length;i++){
+            this.players[i].answered = false
+            this.players[i].wasRight = false
+            this.players[i].passed = false
+            this.clearPlayerPanels()
+        }
     }
     clearPlayerPanels(){
         for (let i=0;i<this.players.length;i++){
             document.querySelector(`div[player="${i}"]`).style.backgroundColor = "white"
         }
     }
-    tick(){
-        if (this.watchTimer && this.currentRoundTimer == 0){
-            console.log(`Round ${this.currentRound} ends...`)
-            this.currentRoundTimer = this.roundDuration
-            this.pointValue = 250
-            this.penalizeSkips()
-            this.currentRound += 1
-            if (this.currentRound <= this.rounds) {
-                console.log(`End of round ${this.currentRound} scores:`)
-                for (let player of this.players){
-                    console.log(`${player.name}: ${player.score}`)
-                }
-                this.trashTalk()
-                alert("Get ready for the next round!")
-                console.log(`Next round (${this.currentRound}/${this.rounds}) begins...`)
-                this.clearPlayerPanels()
-                this.currentQuestion = this.questions[this.currentRound - 1]
-
-                //document.querySelector("#question-disp").textContent = this.currentQuestion.questionText
-                document.querySelector("#question-disp").textContent = `${this.currentQuestion.right}| <br /> ${this.currentQuestion.questionText}`
-                console.log(`The question is:  ${this.currentQuestion.questionText}`)
-                console.log("Choices:")
-                for (let i = 0;i < this.currentQuestion.answers.length;i++){
-                    console.log(`${qChoices[i]}: ${this.currentQuestion.answers[i].answerText}`)
-                    //document.querySelector(`#${this.currentQuestion.answers[i].letter}`).textContent = `${this.answers[i].letter} : ${this.currentQuestion.answers[i].answerText}`
-                    document.querySelector(`#${this.currentQuestion.answers[i].letter}`).textContent = `${this.currentQuestion.answers[i].letter}: ${this.currentQuestion.answers[i].answerText}`
-                }
-                this.resetPlayers()
-                
-            }else {
-                console.log("Game over, Final Scores:")
+    setupPlayers(){
+        for (let i = 0; i< this.players.length;i++){
+            document.querySelector(`h3[player="${i}"]`).textContent = this.players[i].name
+        }
+    }
+    trashTalk(){ // process color commentary at the end of a round
+        for (let i=1;i<this.players.length;i++){
+            let remark = this.players[i].makeComment()
+            if (remark.length > 2){
+                console.log(`${this.players[i].name} says "${remark}"`)
+                document.querySelector("#chatboxx").innerHTML += `${this.players[i].name}:  ${remark} <br /><br />`
+            }
+            
+        }
+    }
+    whoWon(){
+        let winners = []
+        let highScore = this.players[0].score
+        for (let i = 1; i < this.players.length;i++){
+            if (this.players[i].score > highScore){
+                console.log(`i: ${this.players[i].name}: ${this.players[i].score}`)
+                console.log(`i-1: ${this.players[i-1].name}: ${this.players[i-1].score}`)
+                highScore = this.players[i].score
+                console.log(`current high score: ${highScore}`)
+            } /*else {
+                highScore = this.players[i-1].score
+            }*/
+        }
+        console.log(`high score is ${highScore}`)
+        for (let i = 0; i < this.players.length;i++){
+            if (this.players[i].score == highScore){
+                winners.push(this.players[i].name)
+            }
+        }
+        return winners
+    }
+    checkAnswer(player, options, correctAnswer, chances){
+        for (let i=0; i<=chances;i++){
+            if (player.guess(options) == correctAnswer){
+                //console.log(`Guess ${i} right`)
+                return true
+            }            
+        }
+        return false
+    }
+    setupPlayers(){
+        for (let i = 0; i< this.players.length;i++){
+            document.querySelector(`h3[player="${i}"]`).textContent = this.players[i].name
+        }
+    }
+    startRound(){
+        //document.querySelector('#start-game').classList.toggle("btn-disabled")
+        this.currentRound += 1
+        this.watchTimer = true
+        this.resetPlayers()
+        this.pointValue = 250
+        this.currentQuestion = this.questions[this.currentRound - 1]
+        this.currentRoundTimer = this.roundDuration
+        document.querySelector("#question-disp").textContent = `${this.currentRound}: ${this.currentQuestion.questionText}`
+        for (let i = 0;i < this.currentQuestion.answers.length;i++){
+            console.log(`${qChoices[i]}: ${this.currentQuestion.answers[i].answerText}`)
+            //document.querySelector(`#${this.currentQuestion.answers[i].letter}`).textContent = `${this.answers[i].letter} : ${this.currentQuestion.answers[i].answerText}`
+            document.querySelector(`#${this.currentQuestion.answers[i].letter}`).textContent = `${this.currentQuestion.answers[i].letter}: ${this.currentQuestion.answers[i].answerText}`
+        }
+    }
+    startGame(evt){
+        this.watchTimer = true
+        this.setupPlayers()
+        this.startRound()
+        document.querySelector("#start-game").classList.toggle("btn-disabled")
+        
+    }
+    pause(){
+        this.watchTimer = false
+        this.enableNextRound()
+    }
+    endRound(){
+        this.penalizeSkips()
+        //this.currentRound += 1
+        this.trashTalk()
+        this.pause()
+        if (this.currentRound >= this.rounds) {
+            this.endGame()
+        }
+    }
+    endGame(){
+        console.log("Game over, Final Scores:")
                 let resultHTML = "Game Over! <br /><br />"
                 for (let player of this.players){
                     console.log(`${player.name}: ${player.score}`)
@@ -292,7 +339,18 @@ class Game {
                 }
                 document.querySelector("#question-disp").innerHTML = resultHTML
                 this.watchTimer = false
+                this.enableNextRound()
                 this.end()
+    }
+    enableNextRound(){
+        document.querySelector('#next-round').classList.toggle("btn-disabled")
+    }
+    tick() {
+        this.internalCounter += 1
+        if (this.currentRoundTimer == 0 && this.watchTimer){
+            this.endRound()
+            if (this.currentRound <= this.rounds && this.watchTimer){
+                this.enableNextRound()
             }
         }
         if (this.currentRoundTimer > 0 && this.watchTimer){
@@ -312,38 +370,61 @@ class Game {
             }
         }
     }
-    setupPlayers(){
-        for (let i = 0; i< this.players.length;i++){
-            document.querySelector(`h3[player="${i}"]`).textContent = this.players[i].name
-        }
-    }
-    start(){ // populates and kicks off the first round, and tells the Game to watch the timer
-        this.watchTimer = true
-        this.pointValue = 250
-        //console.log(`new game starting...${this.watchTimer}`)
-        this.setupPlayers()
-        this.currentRound += 1
-        document.querySelector("#timer").textContent = this.currentRoundTimer
-        console.log(`Round (${this.currentRound}/${this.rounds}) begins...`)
-        this.currentQuestion = this.questions[0]
-        document.querySelector("#question-disp").textContent = `${this.currentQuestion.right} <br /> ${this.currentQuestion.questionText}`
-        console.log(`The question is:  ${this.currentQuestion.questionText}`)
-        console.log("Choices:")
-        for (let i = 0;i < this.currentQuestion.answers.length;i++){
-            console.log(`${qChoices[i]}: ${this.currentQuestion.answers[i].answerText}`)
-            document.querySelector(`#${this.currentQuestion.answers[i].letter}`).textContent = `${this.currentQuestion.answers[i].letter}: ${this.currentQuestion.answers[i].answerText}`
-            
-            //document.querySelector(`#${this.currentQuestion.answers[i].letter}`).textContent = `${this.answers[i].letter} : ${this.currentQuestion.answers[i].answerText}`
-        }
-    }
-    stop(){
-        this.watchTimer = false
-    }
     end(){
         clearInterval(this.timer)
         return true
     }
 }
+const myGame = new Game(3, 15, 4)
+myGame.players[0].name = prompt("What is your Team Name?", "Hairy Potters")
+const myStartGame = myGame.startGame.bind(myGame)
+const myNextRound = myGame.startRound.bind(myGame)
+//myGame.startGame()
+//myGame.startGame.bind(this)
+//myGame.startRound.bind(this)
 
-myGame = new Game(3, 15, 4)
-myGame.start()
+document.querySelector("#start-game").addEventListener("click", () => {
+    myStartGame();})
+
+document.querySelector("#next-round").addEventListener("click", () => {
+    myGame.enableNextRound()    
+    myNextRound();})
+
+//ev => this.OnEvent(ev)
+
+/*
+document.querySelector("#start-game").addEventListener("click", (evt) => {
+    myGame.startGame()
+})
+document.querySelector("#next-round").addEventListener("click", (evt) => {
+    myGame.startRound()
+})
+*/
+const playerGuess = (letter) => {
+  if (myGame.players[0].answered == false) {
+    myGame.players[0].answered = true
+    if (letter == myGame.currentQuestion.right) {
+      myGame.players[0].score += myGame.pointValue
+      myGame.players[0].wasRight = true
+      //document.querySelector(`div[player="0"]`).textContent = myGame.players[0].score
+      document.querySelector(`div[player="0"]`).style.backgroundColor = 'green'
+    } else if ((letter = 'x')) {
+      myGame.players[0].passed = true
+    } else {
+      document.querySelector(`div[player="0"]`).style.backgroundColor = 'red'
+      myGame.players[0].score -= 50
+    }
+  }
+  document.querySelector(`h4[player="0"]`).textContent = myGame.players[0].score
+}
+
+document.querySelector("#answers").addEventListener("click", (evt=> {
+    playerGuess(evt.target.id)
+}))
+
+for (div of document.querySelectorAll("#answer")){
+    div.addEventListener("click", (evt) =>{
+        console.log(`user clicked ${evt.target.id}`)
+        playerGuess(evt.target.id)
+    })
+}
