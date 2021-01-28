@@ -43,6 +43,7 @@ body {
 
 #instructions {
     position: relative;
+    margin-top: 65px;
     background-color: darkgreen;
     color: whitesmoke;
     font-family: 'Permanent Marker', cursive;
