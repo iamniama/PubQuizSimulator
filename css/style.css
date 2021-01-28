@@ -21,6 +21,7 @@ body {
 .question-panel {
     display: flex;
     flex-direction: column;
+    opacity: 0;
 }
 
 
@@ -67,6 +68,7 @@ header {
     color: whitesmoke;
     border: 1px outset black;
     width: 100%;
+    padding: 20px;
 
 }
 
@@ -140,4 +142,8 @@ button {
 
 #answers {
     margin-top: 15px;
+}
+
+#timer {
+    opacity: 0;
 }

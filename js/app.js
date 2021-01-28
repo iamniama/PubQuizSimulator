@@ -304,9 +304,13 @@ class Game {
     }
     startGame(evt){
         this.watchTimer = true
-        this.setupPlayers()
+        //this.setupPlayers()
         this.startRound()
         document.querySelector("#start-game").classList.toggle("btn-disabled")
+        for (let ele of document.querySelectorAll(".question-panel")){
+            ele.style.opacity = "1"
+        }
+        document.querySelector("#timer").style.opacity = "1"
         
     }
     pause(){
@@ -345,6 +349,11 @@ class Game {
                 this.watchTimer = false
                 this.enableNextRound()
                 this.end()
+                for (let ele of document.querySelectorAll(".question-panel")){
+                    ele.style.opacity = "0"
+                }
+                document.querySelector("#question-disp").style.opacity = "1"
+                document.querySelector("#timer").style.opacity = "0"
     }
     enableNextRound(){
         document.querySelector('#next-round').classList.toggle("btn-disabled")
@@ -381,6 +390,7 @@ class Game {
 }
 const myGame = new Game(3, 15, 4)
 myGame.players[0].name = prompt("What is your Team Name?", "Hairy Potters")
+myGame.setupPlayers()
 const myStartGame = myGame.startGame.bind(myGame)
 const myNextRound = myGame.startRound.bind(myGame)
 //myGame.startGame()
