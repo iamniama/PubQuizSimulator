@@ -116,7 +116,7 @@ const questionLamda = new Question("What is the only vitamin not found in eggs?"
 const questionMu = new Question("What Beatles song was banned from the BBC because of its lyrics?", "I am the Walrus", "The Girl Can't Help It", "Love Me Do", "Come Together", "a", "", "But the BBC didn't mind...", "They Love Me Did", "Maybe at the zoo?")
 const questionNu = new Question("What was singer David Bowie's last name at birth?", "Bowie", "Smith", "Jones", "Lancaster", "c", "A little obvious...", "Alias Smith and...", "", "You'd almost think...")
 const questionXi = new Question("In Buffy: the Vampire Slayer, what was Angel's real first name?", "John", "Max", "Sean", "Liam", "d", fallBackStrings[Math.floor(Math.random() * fallBackStrings.length)], "Too German...", "Right country...", "")
-const questionOmicron = new Question
+const questionOmicron = new Question("In Doctor Who, what material does the Nestene Consciousness control?", "Metal", "Wood", "Plastic", "Stone", "c", "Too dense...", "It doesn't do wood!", "", "Also too dense")
 const questionPi = new Question
 const questionRho = new Question
 const questionSigma = new Question
@@ -126,7 +126,7 @@ const questionUpsilon = new Question
 const standardTeams = [new NPCTeam("Algorithm Section", 3, 1, 14, 50, remarks), new NPCTeam("Generica", 3, 1, 14, 50, remarks)]
 const loserTeams = [new NPCTeam("Drunky Brewster", 2, 5, 2, 10, karenRemarks)]
 const heroTeams = [new NPCTeam("Buzzer Beaters", 4, 10, 3, 95, buzMarks), new NPCTeam("Die Ubernerden", 1, 3, 13, 80, dieuxRemarks)]
-const theQuestions = [questionXi, questionAlpha, questionBeta, questionDelta, questionEpsilon, questionGamma, questionZeta, questionEta, questionTheta, questionIota, questionKappa, questionLamda, questionMu, questionNu]
+const theQuestions = [questionOmicron, questionXi, questionAlpha, questionBeta, questionDelta, questionEpsilon, questionGamma, questionZeta, questionEta, questionTheta, questionIota, questionKappa, questionLamda, questionMu, questionNu]
 
 
 /* 
@@ -400,16 +400,8 @@ document.querySelector("#next-round").addEventListener("click", () => {
     myGame.enableNextRound()    
     myNextRound();})
 
-//ev => this.OnEvent(ev)
 
-/*
-document.querySelector("#start-game").addEventListener("click", (evt) => {
-    myGame.startGame()
-})
-document.querySelector("#next-round").addEventListener("click", (evt) => {
-    myGame.startRound()
-})
-*/
+
 const playerGuess = (letter) => {
   if (myGame.players[0].answered == false) {
     myGame.players[0].answered = true
