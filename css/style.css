@@ -43,7 +43,6 @@ body {
 
 
 section {
-    width: 30%;
     text-align: center;
     
 }
@@ -67,6 +66,7 @@ header {
     background-color: black;
     color: whitesmoke;
     border: 1px outset black;
+    width: 100%;
 
 }
 
@@ -82,7 +82,7 @@ header {
 main {
     display: flex;
     align-items: center;
-    width: 80%;
+    width: 90%;
     height: 60%;
 }
 
