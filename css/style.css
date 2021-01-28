@@ -46,8 +46,8 @@ body {
     background-color: darkgreen;
     color: whitesmoke;
     font-family: 'Permanent Marker', cursive;
-    width: 600px;
-    height: 400px;
+    width: 650px;
+    height: 425px;
     z-index: 5;
     border: 3px outset burlywood;
 }
