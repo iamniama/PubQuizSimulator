@@ -377,7 +377,7 @@ class Game {
         return true
     }
 }
-const myGame = new Game(10, 15, 4)  
+const myGame = new Game(5, 15, 4)  
 if (document.cookie.split(';').some((item) => item.trim().startsWith('team='))) {
     myGame.players[0].name = document.cookie.split('; ').find(row => row.startsWith('team')).split('=')[1];
 } else {
