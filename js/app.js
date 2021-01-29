@@ -99,6 +99,7 @@ const remarks = ["i am the greatest!!", "Your joke here", "lorem ipsem dolor", "
 const karenRemarks = ["IIIIYYYYEeeeaahhhhh I'm gonna need the manager here, like niao", "You're not my supervisor!!!", "Oh em gee barternder is hawt!", "Drink! EMPTY! uuughhh!", "bbbrrruuwuuuwuuuugggghhhhh", "YYYAAAAAAAYYYYYY!!!", "America's ()() BABY!"]
 const dieuxRemarks = ["Bow before us", "You are but mortals...", "Fall..."]
 const buzMarks = ["Boom, right in the nick of time", "Zing!", "Whoooosh", "*BOW*", "Mic Check, Mic DROP!"]
+const mehMarks = ["Meh!", "Meh!!", "Um....oh yeah, Meh!"]
 
 
 const questionAlpha = new Question("Which British actor has played James Bond the least number of times?", "Rowan Atkinson", "George Lazenby", "Sean Connery", "Daniel Craig", "a", "", "Zero is less than one", "Not thish one", "Quantum of Nope")
@@ -123,7 +124,7 @@ const questionSigma = new Question
 const questionTau = new Question
 const questionUpsilon = new Question
 
-const standardTeams = [new NPCTeam("Algorithm Section", 3, 1, 14, 50, remarks), new NPCTeam("Generica", 3, 1, 14, 50, remarks)]
+const standardTeams = [new NPCTeam("Algorithm Section", 3, 1, 14, 50, remarks), new NPCTeam("Generica", 3, 1, 14, 50, remarks), new NPCTeam("Knights Who Say Meh", 1, 1, 14, 50, mehMarks)]
 const loserTeams = [new NPCTeam("Drunky Brewster", 2, 5, 2, 10, karenRemarks)]
 const heroTeams = [new NPCTeam("Buzzer Beaters", 4, 10, 3, 95, buzMarks), new NPCTeam("Die Ubernerden", 1, 3, 13, 80, dieuxRemarks)]
 const theQuestions = [questionPi, questionOmicron, questionXi, questionAlpha, questionBeta, questionDelta, questionEpsilon, questionGamma, questionZeta, questionEta, questionTheta, questionIota, questionKappa, questionLamda, questionMu, questionNu]
