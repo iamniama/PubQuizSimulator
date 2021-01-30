@@ -49,7 +49,7 @@ The Team object represents the player in the Game object and is the base class f
 
 class Team {
     constructor (strName, intIcon){
-        this.name = strName;
+        this.name = strName;   
         this.icon = icons[intIcon];
         this.answered = false;
         this.wasRight = false
@@ -279,6 +279,7 @@ class Game {
     }
     startRound(){  //start a new round in the game
         //document.querySelector('#start-game').classList.toggle("btn-disabled")
+        this.resetQuestionPanel()
         this.currentRound += 1
         this.watchTimer = true
         this.resetPlayers()
@@ -307,9 +308,23 @@ class Game {
         this.watchTimer = false
         this.enableNextRound()
     }
+    showOnlyCorrect(){
+        for (let item of document.querySelectorAll(".answer")){
+            console.log(`${this.currentQuestion.right}, ${item.id}`)
+            if (item.id != this.currentQuestion.right) {
+                item.style.display = "none"
+            }
+        }
+    }
+    resetQuestionPanel(){
+        for (let item of document.querySelectorAll(".answer")){
+            item.style.display = "inherit"
+        }
+    }
     endRound(){  //process end of round actions
         this.penalizeSkips()
         //this.currentRound += 1
+        this.showOnlyCorrect()
         this.trashTalk()
         this.pause()
         if (this.currentRound >= this.rounds) {
